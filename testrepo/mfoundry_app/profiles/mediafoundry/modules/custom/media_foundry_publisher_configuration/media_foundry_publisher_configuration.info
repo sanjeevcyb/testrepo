@@ -1,0 +1,7 @@
+name = Media foundry publisher configuration
+description = "Module for each publisher instance configuration"
+package = Custom
+core = 7.x
+files[] = media_foundry_publisher_configuration.module
+
+

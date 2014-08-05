@@ -1,0 +1,5 @@
+<?php
+
+function menu_feature_enable(){
+  db_query("UPDATE `system` SET `weight` = 9995 WHERE `name` = 'menu_feature'");
+}

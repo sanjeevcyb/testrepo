@@ -1,0 +1,13 @@
+name = Recent Post
+description = Recent Post
+core = 7.x
+package = Features
+version = 7.x-1.0
+project = recent_post
+dependencies[] = blog
+dependencies[] = ctools
+dependencies[] = views
+dependencies[] = views_ui
+features[ctools][] = views:views_default:3.0
+features[features_api][] = api:2
+features[views_view][] = recent_post

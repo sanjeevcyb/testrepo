@@ -1,0 +1,13 @@
+<?php
+function socialthumbnail_preprocess_node(&$variables) {
+	if(!empty($variables['field_upload_video'])) {
+		 $element = array(
+        '#tag' => 'meta',
+        '#attributes' => array(
+            "property" => "og:image",
+            "content" => file_create_url($variables['field_upload_video'][0]['thumbnailfile']->uri),
+                ),
+            );
+    	drupal_add_html_head($element,'facebook_share_image');
+	}
+}

@@ -1,0 +1,61 @@
+<?php
+/**
+ * @file
+ * UUID support for roles
+ */
+
+/**
+ * Implements hook_uuid_sync().
+ */
+function uuidrole_uuid_sync() {
+  module_load_include('inc', 'uuid');
+  // Resave all roles to generate the UUID as required
+  $roles = user_roles();
+  foreach ($roles as $key => $role) {
+    // Reload the role to include all fields
+    $role = user_role_load($key);
+    uuidrole__save($role);
+  }
+}
+
+/**
+ * Load a role by UUID.
+ *
+ * @param string $uuid
+ *  UUID of the role
+ * @see user_load_role_by_name().
+ */
+function uuidrole__load($uuid) {
+  return db_select('role', 'r')->fields('r')->condition('uuid', $uuid)->execute()->fetchObject();
+}
+
+/**
+ * Delete a role by UUID
+ *
+ * @param string $uuid
+ *  Role UUID
+ * @see user_role_delete().
+ */
+function uuidrole__delete($uuid) {
+  $role = uuidrole__load($uuid);
+  if (!empty($role->rid)) {
+    return user_role_delete($role->rid);
+  }
+}
+
+/**
+ * Save a role and assign a UUID
+ *
+ * @param object $role
+ *  Role object
+ * @return integer|boolean
+ *  Returns SAVED_NEW or SAVED_UPDATED on success, FALSE otherwise.
+ * @see user_role_save().
+ */
+function uuidrole__save($role) {
+  if (empty($role->uuid)) {
+    module_load_include('inc', 'uuid');
+    $role->uuid = uuid_generate();
+  }
+  return user_role_save($role);
+}

@@ -1,0 +1,129 @@
+#footer .block-content ul li:first-child + li + li{
+	text-align:right;
+}
+
+#page-catalogue #page #columns #content
+{
+	max-width:889px;
+}
+
+.logged-in .region-header .block-inner .wel span
+{
+	margin:0;
+}
+
+.front #page #columns #topcontent #block-views-free-events-block-1 .jcarousel-clip-horizontal ul li .views-field-title
+,.front #page #columns #topcontent #block-views-free-videos-block .jcarousel-container-horizontal ul li .eventclass
+{
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#6c000000', endColorstr='#6c000000'); /* IE */
+}
+.page-catalogue .view-content{
+	width:78% !important;
+}
+/*.revenue ul li{
+	width: 50%;
+}
+.vbx span.txtbox{
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#6c000000', endColorstr='#6c000000'); /* IE */
+}*/
+/*
+.searchbox input#search{
+	line-height: 40px;
+}
+.add-user-profile .select-style{
+	margin-left: -302px;
+	margin-top: -61px;
+}
+.add-user-profile .select-style.state{
+	margin-top:1px;
+}
+.login-box form input[type="text"], .login-box form input[type="password"]{
+	line-height: 30px;
+}
+.catalogue .media-list{
+	max-width: 863px;
+}
+.main-list{
+	width: 100%;
+}
+
+.create-live-event form p input[type="text"],#expiration-date,.tab-container form input[type="text"],#meta-data-info input[type="text"]{
+	line-height: 40px;
+}
+.file-uipload-btn .get-file-path,#schedule #start-date, #schedule #end-date, #schedule #start-time, #schedule #end-time{
+	line-height: 40px;
+}
+#meta-data-info p select.select-style{
+	width: 352px;
+	margin-top: 0px;
+	margin-left: -352px;
+}
+.create-live-event form p input#tag1_tag{
+	line-height: normal;
+}
+.left-menu li.active.last-child{
+border-bottom: 1px solid #BEBEBE;
+}
+.selectboxes ul.slbx li.last-child{
+	width: 42%;
+}
+.bundlesdesc p input[type="text"]{
+	line-height: 40px;
+}
+.selectboxes ul.slbx li.last-child td{
+	padding: 13.4px 11px;
+}
+.add-user-profile .select-style{
+	margin-left: -302px;
+	margin-top: -61px;
+}
+.top-menu li{
+	width: 30.7%;
+	border-radius: 20px 20px 0 0;
+}
+.user-profile .add-user-profile .select-style,.user-profile .add-user-profile .select-style.state{
+	margin-top: -41px;
+}
+.add-user-profile .select-style.state{
+	margin-top:1px;
+}
+.welcome-btn{
+	background-image: url("../images/welcome.png");
+	background-repeat: no-repeat;
+	background-position: 97% 16px;
+}
+.welcome-btn:hover{
+	background-image: url("../images/white-arrow-down.png");
+	background-repeat: no-repeat;
+	background-position: 97% 16px;
+}
+.charts select{
+	width: 352px;
+	margin-left: -15px;
+}
+.top-menu li{
+	border-radius: 10px;
+	behavior: url("../../css/PIE.htc");
+}
+#popupsubscription{
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#5c000000', endColorstr='#5c000000'); 
+}
+.change-right.login-box,.login-box.change-right{
+	right:121px;
+}
+.add-user-profile .select-style{
+	margin-left: -302px;
+	margin-top: -61px;
+}
+.add-user-profile .select-style.state{
+	margin-top:1px;
+}
+#wrapper,.index#wrapper{
+	min-width: 1240px;
+}
+.create-live-event form p  input#start-date,.create-live-event form p input#start-time{
+	margin-right: 20px;
+}
+.top-menu li.rounded{
+border-radius: 20px 20px 0 0;	
+}*/

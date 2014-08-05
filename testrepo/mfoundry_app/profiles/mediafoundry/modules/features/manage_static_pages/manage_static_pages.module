@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Manage Static Pages feature.
+ */
+
+include_once 'manage_static_pages.features.inc';

@@ -1,0 +1,63 @@
+<?php
+
+/**
+ * @file
+ * Install tasks for uuidrole
+ */
+
+/**
+ * Implements hook_install().
+ */
+function uuidrole_install() {
+  module_load_include('inc', 'uuid');
+
+  if (!db_field_exists('role', 'uuid')) {
+    $field = array(
+      'type' => 'varchar',
+      'not null' => TRUE,
+      'length' => 255,
+      'default' => '',
+      'description' => 'Role UUID',
+    );
+
+    db_add_field('role', 'uuid', $field);
+  }
+
+  module_load_include('inc', 'uuid');
+  // Resave all roles to generate the UUID as required
+  $roles = user_roles();
+  foreach ($roles as $key => $role) {
+    // Reload the role to include all fields
+    $role = user_role_load($key);
+    if (empty($role->uuid)) {
+      $role->uuid = uuid_generate();
+      user_role_save($role);
+    }
+  }
+
+  db_add_unique_key('role', 'uuid', array('uuid'));
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function uuidrole_uninstall() {
+  db_drop_unique_key('role', 'uuid');
+  db_drop_field('role', 'uuid');
+}
+
+/**
+ * Implements hook_schema_alter().
+ */
+function uuidrole_schema_alter(&$schema) {
+  // Add field to existing schema.
+  $schema['role']['fields']['uuid'] = array(
+    'type' => 'varchar',
+    'not null' => FALSE,
+    'length' => 255,
+    'default' => '',
+    'description' => 'Role UUID',
+  );
+
+  $schema['role']['unique keys']['uuid'] = array('uuid');
+}

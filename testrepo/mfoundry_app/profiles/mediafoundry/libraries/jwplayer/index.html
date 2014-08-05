@@ -1,0 +1,52 @@
+<head>
+<title>JW Player Fallback</title>
+</head>
+
+<body>
+<script type='text/javascript' src='jwplayer.js'></script>
+<script type="text/javascript">
+  jwplayer.key="jBmfNDGjXLBvISv8CkP+qG4DI74orlj4YP2dDuhS9IQ=";
+</script>
+<div id='mediaplayer'></div>
+<div id='player'></div>
+<div id="myElement">
+<a href="rtsp://example.com/vod/mp4:myVideo.mp4">watch this stream over RTSP</a>
+</div> 
+<script type="text/javascript">
+jwplayer('mediaplayer').setup({
+    'id': 'playerID',
+    'width': '480',
+    'height': '270',
+    'provider': 'rtmp',
+    'streamer': 'rtmp://172.27.141.64:1935/vod',
+    'file': 'myStream',
+    'modes': [
+        {type: 'flash', src: 'player.swf'},
+    {type: 'html5', config:
+        {
+        'file': "http://172.27.141.64:1935/vod/myStream/playlist.m3u8",
+        provider: 'video'
+        }
+    }
+    ]
+  });
+jwplayer("player").setup({
+    sources: [{
+        file: "rtmp://172.27.141.64:1935/vod/mp4:sample.mp4"
+    },{
+        file: "http://172.27.141.64:1935/vod/sample.mp4/playlist.m3u8"
+    }],
+    rtmp: {
+        bufferlength: 3
+    },
+    fallback: false
+});
+
+jwplayer("myElement").setup({
+file: "http://172.27.141.64:1935/vod/mp4:sample.mp4/playlist.m3u8",
+image: "/assets/myPoster.jpg",
+fallback: false
+});
+</script>
+</body>
+</html>

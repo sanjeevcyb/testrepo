@@ -1,0 +1,98 @@
+<?php
+
+/**
+ * @file
+ * Install file.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function media_foundry_publisher_instance_install() {
+
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function media_foundry_publisher_instance_uninstall() {
+
+}
+
+
+function media_foundry_publisher_instance_schema() {
+  $schema['publisher_instance'] = array(
+      'description' => t('The base table for storing all publisher instance details.'),
+      'fields' => array(
+          'pid' => array(
+              'description' => t('The primary identifier for a publisher id.'),
+              'type' => 'serial',
+              'unsigned' => TRUE,
+              'not null' => TRUE),
+          'pname' => array(
+              'description' => t('The publisher name.'),
+              'type' => 'varchar',
+              'length' => 128,
+              'not null' => TRUE,
+              'default' => ''),
+          'pemail' => array(
+              'description' => t('The publisher email.'),
+              'type' => 'varchar',
+              'length' => 128,
+              'not null' => TRUE,
+              'default' => ''),
+          'paddress' => array(
+              'description' => t('The publisher address.'),
+              'type' => 'varchar',
+              'length' => 255,
+              'not null' => TRUE,
+              'default' => ''),
+          'pphone' => array(
+              'description' => t('The publisher phone number'),
+              'type' => 'varchar',
+              'length' => 32,
+              'not null' => TRUE,
+              'default' => ''),
+          'pdomainname' => array(
+              'description' => t('The publisher domain name'),
+              'type' => 'varchar',
+              'length' => 254,
+              'not null' => TRUE,
+              'default' => ''),
+          'pdbname' => array(
+              'description' => t('The publisher database name'),
+              'type' => 'varchar',
+              'length' => 254,
+              'not null' => TRUE,
+              'default' => ''),
+          'pdbusername' => array(
+              'description' => t('The publisher database username'),
+              'type' => 'varchar',
+              'length' => 128,
+              'not null' => TRUE,
+              'default' => ''),
+          'pdbpass' => array(
+              'description' => t('The publisher database password'),
+              'type' => 'varchar',
+              'length' => 128,
+              'not null' => TRUE,
+              'default' => ''),
+          'pinstance_created' => array(
+              'type' => 'int',
+              'not null' => TRUE,
+              'default' => 0,
+              'description' => 'Timestamp for when publisher instance has created.',
+           ),
+      ),
+      'indexes' => array(
+          'pinstance_created' => array('pinstance_created'),
+       ),
+      'unique keys' => array(
+          'pemail' => array('pemail'),
+          'pdomainname' => array('pdomainname'),
+          'pdbname' => array('pdbname'),
+      ),
+      'primary key' => array('pid'),
+  );
+  return $schema;
+}

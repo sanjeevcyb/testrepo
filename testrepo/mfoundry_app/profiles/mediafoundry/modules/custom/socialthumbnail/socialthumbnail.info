@@ -1,0 +1,5 @@
+name = Social Thumbnail
+
+description = "Social Media Sharing Thumbnail"
+
+core = 7.x

@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Publisher dashbaord with main menu feature.
+ */
+
+include_once 'publisher_dashbaord_with_main_menu.features.inc';

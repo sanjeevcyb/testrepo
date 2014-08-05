@@ -1,0 +1,2 @@
+<?php
+include_once 'media_foundry_publisher_account.features.inc';

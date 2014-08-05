@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Secure Pages Feature feature.
+ */
+
+include_once 'secure_pages_feature.features.inc';

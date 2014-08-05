@@ -1,0 +1,5 @@
+<?php
+
+function permission_feature_enable(){
+  db_query("UPDATE `system` SET `weight` = 999999 WHERE `name` = 'permission_feature'");
+}

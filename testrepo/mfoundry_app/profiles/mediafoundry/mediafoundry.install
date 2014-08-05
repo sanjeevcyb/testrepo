@@ -1,0 +1,403 @@
+<?php
+/**
+ * @file
+ * Install, update and uninstall functions for the minimal installation profile.
+ */
+
+/**
+ * Implements hook_install().
+ *
+ * Performs actions to set up the site for this profile.
+ *
+ * @see system_install()
+ */
+function mediafoundry_install() {
+	
+  // Enable some standard blocks.
+  variable_set('theme_default', 'media_foundry_publisher');
+  
+  // Any themes without keys here will get numeric keys and so will be enabled,
+  // but not placed into variables.
+  $enable = array(
+  		'theme_default' => 'media_foundry_publisher',
+  		'admin_theme' => 'seven',
+  		'affiliate_theme_one'
+  );
+  theme_enable($enable);
+ 
+  
+  // Disable the default Bartik theme
+  theme_disable(array('bartik'));
+  
+  $values = array(
+    array(
+      'module' => 'system',
+      'delta' => 'main',
+      'theme' => variable_get('theme_default'),
+      'status' => 1,
+      'weight' => -1,
+      'region' => 'content',
+    	'visibility' => 0,
+      'pages' => '',
+    	'title' => '',	
+      'cache' => -1,
+    ),
+    array(
+      'module' => 'user',
+      'delta' => 'login',
+      'theme' => variable_get('theme_default'),
+      'status' => 1,
+      'weight' => 0,
+      'region' => 'sidebar_first',
+    	'visibility' => 1,
+      'pages' => '<front>',
+    	'title' => '',
+      'cache' => -1,
+    ),
+    array(
+      'module' => 'system',
+      'delta' => 'navigation',
+      'theme' => variable_get('theme_default'),
+      'status' => 0,
+      'weight' => 0,
+      'region' => 'sidebar_first',
+    		'visibility' => 0,
+      'pages' => '',
+    		'title' => '',
+      'cache' => -1,
+    ),
+    array(
+      'module' => 'system',
+      'delta' => 'management',
+      'theme' => variable_get('theme_default'),
+      'status' => 0,
+      'weight' => 1,
+      'region' => 'sidebar_first',
+    		'visibility' => 0,
+      'pages' => '',
+    		'title' => '',
+      'cache' => -1,
+    ),
+    array(
+      'module' => 'system',
+      'delta' => 'help',
+      'theme' => variable_get('theme_default'),
+      'status' => 0,
+      'weight' => 0,
+      'region' => 'help',
+    	'visibility' => 0,
+      'pages' => '','title' => '',
+      'cache' => -1,
+    ),
+  	array(
+      'module' => 'tagclouds',
+      'delta' => '7',
+      'theme' => variable_get('theme_default'),
+      'status' => 1,
+      'weight' => 2,
+      'region' => 'sidebar_second',
+      'visibility' => 1,
+      'pages' => 'videos/*','title' => 'Tag Cloud',
+      'cache' => -1,
+    ),    
+    array(
+      'module' => 'views',
+      'delta' => 'related_video-block',
+      'theme' => variable_get('theme_default'),
+      'status' => 1,
+      'weight' => 1,
+      'region' => 'sidebar_second',
+      'visibility' => 0,
+      'pages' => '','title' => '',
+      'cache' => -1,
+    ),
+    array(
+      'module' => 'views',
+      'delta' => 'recent_post-block',
+      'theme' => variable_get('theme_default'),
+      'status' => 1,
+      'weight' => 0,
+      'region' => 'sidebar_second',
+      'visibility' => 1,
+      'pages' => 'blogs/*','title' => '',
+      'cache' => -1,
+    ),
+    array(
+      'module' => 'views',
+      'delta' => 'FrontPageSlide-block',
+      'theme' => variable_get('theme_default'),
+      'status' => 1,
+      'weight' => 0,
+      'region' => 'help',
+      'visibility' => 1,
+      'pages' => '<front>','title' => '',
+      'cache' => -1,
+    ),
+    array(
+      'module' => 'views',
+      'delta' => 'user_information-block',
+      'theme' => variable_get('theme_default'),
+      'status' => 1,
+      'weight' => -1,
+      'region' => 'content',
+      'visibility' => 1,
+      'pages' => 'user/*','title' => '',
+      'cache' => -1,
+    ),
+    array(
+      'module' => 'views',
+      'delta' => 'domain_specific_tag_cloud-block',
+      'theme' => 'affiliate_theme_one',
+      'status' => 1,
+      'weight' => 2,
+      'region' => 'sidebar_second',
+      'visibility' => 1,
+      'pages' => 'videos/*','title' => '<none>',
+      'cache' => -1,
+    ),
+    array(
+      'module' => 'search',
+      'delta' => 'form',
+      'theme' => 'affiliate_theme_one',
+      'status' => 1,
+      'weight' => 0,
+      'region' => 'header',
+      'visibility' => 0,
+      'pages' => '',
+      'title' => '',
+      'cache' => -1,
+    ),
+    array(
+      'module' => 'views',
+      'delta' => 'recent_post-block',
+      'theme' => 'affiliate_theme_one',
+      'status' => 1,
+      'weight' => 0,
+      'region' => 'sidebar_second',
+      'visibility' => 1,
+      'pages' => 'blogs/*','title' => '',
+      'cache' => -1,
+    ),    
+    array(
+      'module' => 'views',
+      'delta' => 'related_video-block',
+      'theme' => 'affiliate_theme_one',
+      'status' => 1,
+      'weight' => 1,
+      'region' => 'sidebar_second',
+      'visibility' => 1,
+      'pages' => 'videos/*','title' => '',
+      'cache' => -1,
+    ),
+    array(
+      'module' => 'views',
+      'delta' => 'userinformation-block_1',
+      'theme' => 'affiliate_theme_one',
+      'status' => 1,
+      'weight' => 0,
+      'region' => 'content',
+      'visibility' => 0,
+      'pages' => '','title' => '',
+      'cache' => -1,
+    ),
+    array(
+      'module' => 'views',
+      'delta' => 'homepage_block-block',
+      'theme' => 'affiliate_theme_one',
+      'status' => 1,
+      'weight' => 1,
+      'region' => 'sidebar_second',
+      'visibility' => 0,
+      'pages' => '','title' => '',
+      'cache' => -1,
+    ),
+    array(
+      'module' => 'views',
+      'delta' => 'homepageevents-block',
+      'theme' => 'affiliate_theme_one',
+      'status' => 1,
+      'weight' => 2,
+      'region' => 'sidebar_second',
+      'visibility' => 0,
+      'pages' => '','title' => '',
+      'cache' => -1,
+    ),
+    array(
+      'module' => 'views',
+      'delta' => 'homepagevideo-block',
+      'theme' => 'affiliate_theme_one',
+      'status' => 1,
+      'weight' => 3,
+      'region' => 'sidebar_second',
+      'visibility' => 0,
+      'pages' => '','title' => '',
+      'cache' => -1,
+    )
+  );
+  $query = db_insert('block')->fields(array('module', 'delta', 'theme', 'status', 'weight', 'region', 'visibility', 'pages', 'title', 'cache'));
+  foreach ($values as $record) {
+    $query->values($record);
+  }
+  $query->execute();
+  
+  // Insert default pre-defined node types into the database. For a complete
+  // list of available node type attributes, refer to the node type API
+  // documentation at: http://api.drupal.org/api/HEAD/function/hook_node_info.
+  $types = array(
+  		array(
+  				'type' => 'page',
+  				'name' => st('Basic page'),
+  				'base' => 'node_content',
+  				'description' => st("Use <em>basic pages</em> for your static content, such as an 'About us' page."),
+  				'custom' => 1,
+  				'modified' => 1,
+  				'locked' => 0,
+  		),
+  		array(
+  				'type' => 'article',
+  				'name' => st('Article'),
+  				'base' => 'node_content',
+  				'description' => st('Use <em>articles</em> for time-sensitive content like news, press releases or blog posts.'),
+  				'custom' => 1,
+  				'modified' => 1,
+  				'locked' => 0,
+  		),
+  );
+  
+  foreach ($types as $type) {
+  	$type = node_type_set_defaults($type);
+  	node_type_save($type);
+  	node_add_body_field($type);
+  }
+  
+  // Insert default pre-defined RDF mapping into the database.
+  $rdf_mappings = array(
+  		array(
+  				'type' => 'node',
+  				'bundle' => 'page',
+  				'mapping' => array(
+  						'rdftype' => array('foaf:Document'),
+  				),
+  		),
+  		array(
+  				'type' => 'node',
+  				'bundle' => 'article',
+  				'mapping' => array(
+  						'field_image' => array(
+  								'predicates' => array('og:image', 'rdfs:seeAlso'),
+  								'type' => 'rel',
+  						),
+  						'field_tags' => array(
+  								'predicates' => array('dc:subject'),
+  								'type' => 'rel',
+  						),
+  				),
+  		),
+  );
+  foreach ($rdf_mappings as $rdf_mapping) {
+  	rdf_mapping_save($rdf_mapping);
+  }
+  
+  // Default "Basic page" to not be promoted and have comments disabled.
+  variable_set('node_options_page', array('status'));
+  variable_set('comment_page', COMMENT_NODE_HIDDEN);
+  
+  // Don't display date and author information for "Basic page" nodes by default.
+  variable_set('node_submitted_page', FALSE);
+  
+  // Enable user picture support and set the default to a square thumbnail option.
+  variable_set('user_pictures', '1');
+  variable_set('user_picture_dimensions', '1024x1024');
+  variable_set('user_picture_file_size', '800');
+  variable_set('user_picture_style', 'thumbnail');
+
+  // Allow visitor account creation, but with administrative approval.
+  variable_set('user_register', USER_REGISTER_VISITORS_ADMINISTRATIVE_APPROVAL);
+
+  // Enable default permissions for system roles.
+  user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, array('access content'));
+  user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array('access content'));
+  
+  // Create a default role for site administrators, with all available permissions assigned.
+  $admin_role = new stdClass();
+  $admin_role->name = 'administrator';
+  $admin_role->weight = 2;
+  user_role_save($admin_role);
+  user_role_grant_permissions($admin_role->rid, array_keys(module_invoke_all('permission')));
+  // Set this as the administrator role.
+  variable_set('user_admin_role', $admin_role->rid);
+  
+  // Assign user 1 the "administrator" role.
+  db_insert('users_roles')
+  ->fields(array('uid' => 1, 'rid' => $admin_role->rid))
+  ->execute();
+  
+  //Reverting Overridden Features
+  features_revert(array('access_rules' => array('variable'))); 
+  features_revert(array('affiliate_home_page_block_feature' => array('fe_block_settings')));
+  features_revert(array('appearance_features' => array('variable'))); 
+  features_revert(array('blog_feature' => array('field_instance')));
+  features_revert(array('commerce_rules_feature' => array('rules_config')));
+  features_revert(array('default_content_feature' => array('uuid_node')));
+  features_revert(array('footer_links_block' => array('fe_block_settings')));
+  features_revert(array('front_page_slide_show' => array('user_permission')));
+  features_revert(array('frontpageslide' => array('fe_block_settings')));
+  features_revert(array('homepage_block' => array('fe_block_settings')));
+  features_revert(array('homepageevents' => array('fe_block_settings')));
+  features_revert(array('homepagevideo' => array('fe_block_settings')));
+  features_revert(array('key_features' => array('fe_block_settings'))); 
+  features_revert(array('custom_error_page' => array('variable')));
+  features_revert(array('image_presets' => array('image')));
+  features_revert(array('key_features' => array('user_permission')));
+  features_revert(array('media_video_content_type' => array('field_instance')));  
+  features_revert(array('one_time_subscription' => array('fe_block_settings')));
+  features_revert(array('publisher' => array('user_permission')));
+  features_revert(array('publisher_dashbaord_with_main_menu' => array('fe_block_settings')));
+  features_revert(array('publisher_dashbaord_with_main_menu' => array('menu_links')));
+  features_revert(array('publisher_dashbaord_with_main_menu' => array('user_permission')));
+  features_revert(array('publisher_account' => array('views_view '))); 
+  features_revert(array('permission_feature' => array('user_permission')));
+  features_revert(array('media_video_content_type' => array('field_instance'))); 
+  features_revert(array('related_video' => array('fe_block_settings')));
+  features_revert(array('slide_show' => array('user_permission')));
+  features_revert(array('social_share' => array('fe_block_settings')));
+  features_revert(array('tags_in_tags' => array('fe_block_settings')));
+  features_revert(array('taxonomy_feature' => array('uuid_term')));
+  features_revert(array('wowza_configurations_' => array('fe_block_settings')));
+  features_revert(array('workbench_feature' => array('user_permission')));
+  features_revert(array('wmf' => array('fe_block_settings')));
+  features_revert(array('welcome_block' => array('user_permission')));
+  features_revert(array('userinformation' => array('fe_block_settings')));
+  features_revert(array('user_information' => array('fe_block_settings')));
+  features_revert(array('taxonomy_view_feature' => array('views_view '))); 
+  features_revert(array('twitter_login' => array('user_permission')));
+  features_revert(array('twitter_login' => array('fe_block_settings')));
+  features_revert(array('twitter_login' => array('variable')));
+  features_revert(array('time_based_subscription' => array('fe_block_settings')));
+  features_revert(array('live_evnt_content_type' => array('field_instance')));
+  features_revert(array('default_content_feature' => array('uuid_node')));
+  features_revert(array('default_content_feature' => array('variable')));
+  features_revert(array('product_variation_type_fields' => array('uuid_term')));
+  features_revert(array('event_display' => array('user_permission')));
+  features_revert(array('user_profile_feature' => array('variable')));
+  features_revert(array('video_presets' => array('variable'))); 
+  features_revert(array('event_display' => array('variable')));
+  features_revert(array('webform_feature' => array('uuid_node')));
+  features_revert(array('shopping_cart_form_features' => array('views_view')));
+  features_revert(array('product_variation_type_fields' => array('conditional_fields')));
+  features_revert(array('menu_feature' => array('fe_block_settings')));
+  features_revert(array('menu_feature' => array('menu_links')));
+  features_revert(array('media_foundry_publisher_account' => array('uuid_node')));
+
+
+  
+  //Rebiulding Node Access Permission
+  node_access_rebuild();
+
+   db_update('commerce_autosku_patterns')
+                ->fields(array('pattern' => '[commerce-product:product-sku-code]-[random:number]-[current-domain:id]'))
+                ->condition('product_type', 'product', '=')->execute();
+
+	//Flush Cache
+  cache_clear_all();
+}

@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Image Presets feature.
+ */
+
+include_once 'image_presets.features.inc';

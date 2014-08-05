@@ -1,0 +1,118 @@
+
+.page-taxonomy-term span.empty
+{
+	 color: #6C6C6C !important; 
+}
+
+
+/*********affiliate_mediaf**************/
+.front #page #columns #topcontent h2
+{
+	color:#dc7110;
+}
+
+.front #page #columns #topcontent #block-views-free-events-block-1 .jcarousel-clip-horizontal ul li .views-field-view-node a
+{
+	color:#dc7110;
+}
+
+/********affiliate_mediaf***************/
+
+/******blog*********/
+.blog_title
+{
+	color: #DC7110;
+}
+
+.page-cart #columns #main-content .view-header h3
+{
+	color: #DC7110;
+}
+
+#block-views-homepage-block-block .views-field-view-node .field-content a
+{
+	 background-color: #DC7110;
+}
+
+.front #columns #block-views-homepageevents-block .view-header h2 .head_title,.front #columns .view-homepagevideo .view-header h2 .head_title
+{
+	color: #DC7110;
+}
+
+.front #columns #block-views-homepageevents-block .view-header .btn-primary,.front #columns .view-homepagevideo .view-header .btn-primary,.liveeventbtn {
+    background-color: #DC7110;
+}
+
+.front #columns #block-views-homepageevents-block .views-field-title a,.front #columns .view-homepagevideo .views-field-title a{
+	color:#DC7110;
+}
+/*******blog********/
+
+/*******style*********/
+.content-inner #page-title
+{
+	 color: #DC7110;
+}
+
+.page-media-dashboard .panel-col-first .inside .block-inner h2
+{
+	color: #DC7110;
+}
+
+.page-media-dashboard .panel-col-first .inside .pane-control-content-panes-pane-tc-updated .block-inner .pane-title
+{
+	color: #DC7110;
+}
+.page-media-dashboard .pane-quicktabs-publisher-dashboard-events-block .block-inner .pane-title
+{
+	 color: #DC7110;
+}
+#panels-ipe-paneid-4 .pane-latest-uploaded-media .pane-title
+{
+	color: #DC7110;
+}
+#panels-ipe-paneid-5 .pane-control-content-panes-pane-tc-updated .pane-title
+{
+	color: #DC7110;
+}
+
+.page-node-add-video #main-content h1
+{
+	color: #DC7110;
+}
+.page-userslist #page #columns  #main-content #page-title
+{
+    color: #DC7110;
+}
+.page-publisher-account .view-id-publisher_account .cols-4 .col-first .views-field-title .field-content a
+{
+	color: #DC7110;
+}
+/*******style********/
+
+/********style-10588*********/
+ #block-views-related-video-block h2.block-title {
+    color: #DC7110;
+ }
+
+/*******style-10588*********/
+
+/******subscription**********/
+.node-type-event-display .commerce-product-field-commerce-price .field-items .field-item
+{
+	color: #DC7110;
+}
+.account-details h3 {
+    color: #DC7110;
+}
+.page-user #columns .domain-status h3{
+	color: #DC7110;
+}
+/******subscription*********/
+
+/********videodetail***********/
+.node-type-video .blog_title
+{
+	color: #DC7110;
+}
+/********videodetail**********/

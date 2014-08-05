@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Cart Override Feature feature.
+ */
+
+include_once 'cart_override_feature.features.inc';

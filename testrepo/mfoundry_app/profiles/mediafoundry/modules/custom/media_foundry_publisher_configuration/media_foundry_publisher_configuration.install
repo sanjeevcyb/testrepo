@@ -1,0 +1,30 @@
+<?php
+
+/**
+ * @file
+ * Install file.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function media_foundry_publisher_configuration_install() {
+
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function media_foundry_publisher_configuration_uninstall() {
+  $variables = array(
+    'no_affiliate_site',
+    'no_videos',
+    'video_disk_storage_capacity',
+    'subscription_access',
+    'video_encoding_profile_access',
+    'live_event_access',
+  );
+  foreach ($variables as $variable) {
+    variable_del($variable);
+  }
+}

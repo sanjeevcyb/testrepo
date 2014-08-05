@@ -1,0 +1,16 @@
+name = Affiliate Home Page Default Content Feature
+core = 7.x
+package = Features
+version = 7.x-1.0
+project = affiliate_home_page_default_content_feature
+dependencies[] = ctools
+dependencies[] = features
+dependencies[] = strongarm
+__drupal_alter_by_ref[][node][article] = article
+features[ctools][] = strongarm:strongarm:1
+features[features_api][] = api:2
+features[uuid_node][] = 46a51e23-70c1-458f-adfb-cdee1d9e4c11
+features[uuid_node][] = bc624f68-178c-4c43-8677-80557822f32c
+features_exclude[node][article] = article
+features_exclude[dependencies][live_evnt_content_type] = live_evnt_content_type
+features_exclude[field_instance][node-article-body] = node-article-body

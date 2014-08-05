@@ -1,0 +1,161 @@
+<?php
+
+/**
+ * @file
+ * This module is used to generate publisher instances & handle publisher general features.
+ */
+
+define("MEDIA_FOUNDRY_PUBLISHER_INSTANCE_CONFIGURATION", "publisher instance configuration restriction access");
+
+/**
+ * Implements hook_init().
+ */
+function media_foundry_publisher_configuration_init() {
+
+}
+/**
+ * Implements hook_permission().
+ */
+function media_foundry_publisher_configuration_permission() {
+  return array(
+      MEDIA_FOUNDRY_PUBLISHER_INSTANCE_CONFIGURATION => array(
+          'title' => t('publisher instance configuration restriction access'),
+          'description' => t('Allow user to handle publisher features configuration')
+      )
+  );
+}
+/**
+ * Implements of hook_menu().
+ */
+function media_foundry_publisher_configuration_menu() {
+  $items = array();
+  $items['admin/config/publisher/settings'] = array(
+      'title' => 'Publisher Restriction',
+      'description' => 'Set the publisher configuration restriction',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('media_foundry_publisher_configuration_restriction'),
+      'file' => 'media_foundry_publisher_configuration.admin.inc',
+      'access arguments' => array(MEDIA_FOUNDRY_PUBLISHER_INSTANCE_CONFIGURATION),
+  );
+  return $items;
+}
+
+/**
+ * Implements of hook_menu_alter().
+ */
+function media_foundry_publisher_configuration_menu_alter(&$items){
+  $items['node/add/video']['access callback'] = 'video_content_access_callback';
+  // Next line needed for Drupal 7
+  unset($items['node/add/video']['access arguments']);
+
+}
+
+function video_content_access_callback() {
+  global $user;
+  $allowed_limit = variable_get('allowed_limit', 100);
+
+  $units = explode(' ', 'B KB MB GB TB PB');
+  $SIZE_LIMIT = 3221225472; //5368709120;
+  $disk_used = foldersize("D:/xampp/htdocs/dev.mediafoundry/sites/default/files");
+  $disk_remaining = $SIZE_LIMIT - $disk_used;
+  if($disk_used < $SIZE_LIMIT ) {
+    $node_counts = db_query("SELECT count(*) FROM {node} WHERE type = 'video' and uid = :uid", array(':uid' => $user->uid))->fetchField();
+    if ($node_counts < $allowed_limit && user_access("create video")) {
+      return TRUE;
+    }
+    else{
+      drupal_set_message('You have exceeded the limit of ' . $allowed_limit . ' videos for uploading video.','error');
+      return FALSE;
+    }
+  }
+  else {
+    drupal_set_message('You have exceeded the limit of disc size ' . format_disk_size($SIZE_LIMIT) . ' GB for uploading video.','error');
+    return FALSE;
+  }
+}
+
+function foldersize($path) {
+  $total_size = 0;
+  $files = scandir($path);
+  $cleanPath = rtrim($path, '/'). '/';
+
+  foreach($files as $t) {
+    if ($t<>"." && $t<>"..") {
+      $currentFile = $cleanPath . $t;
+      if (is_dir($currentFile)) {
+        $size = foldersize($currentFile);
+        $total_size += $size;
+      }
+      else {
+        $size = filesize($currentFile);
+        $total_size += $size;
+      }
+    }
+  }
+
+  return $total_size;
+}
+
+
+function format_disk_size($size) {
+  global $units;
+
+  $mod = 1024;
+
+  for ($i = 0; $size > $mod; $i++) {
+    $size /= $mod;
+  }
+
+  $endIndex = strpos($size, ".")+3;
+
+  return substr( $size, 0, $endIndex).' '.$units[$i];
+}
+
+
+/**
+ * Implements of hook_form_alter().
+ */
+function media_foundry_publisher_configuration_form_alter(&$form, &$form_state, $form_id) {
+  /* if($form_id == "media_foundry_publisher_configuration_restriction") {
+   unset($form['domain_settings']);
+  } */
+  if($form_id == "video_node_form" || $form_id == "live_event_node_form") {
+    if(!variable_get('subscription_access', FALSE)) {
+      unset($form['field_add_to_subscription']['und']['#options'][2]);
+    }
+  }
+  if($form_id == "media_foundry_publisher_configuration_restriction") {
+    $form['#submit'][] = "media_foundry_configuration_restriction_custom_submit";
+  }
+}
+
+function media_foundry_configuration_restriction_custom_submit($form, &$form_state) {
+  $publisheradmin_rid = "5";
+  if(!variable_get('video_encoding_profile_access', FALSE)) {
+    $publisher_permissions = array(
+        'Administer video presets' => FALSE, // revoke permission
+    );
+    // revoke permission
+    user_role_change_permissions($publisheradmin_rid, $publisher_permissions);
+  }
+  else {
+
+  }
+
+}
+function media_foundry_publisher_configuration_node_access($node, $op, $account) {
+  // If $node is a string, the node has not yet been created and we don't care about that case.
+
+ /* if (is_string($node)) {
+    return NODE_ACCESS_IGNORE;
+  }
+
+ echo $type =  $node->type;
+ echo $op;
+  if ($op == 'add' && $type == 'live_event' && !$account->uid) {
+    return NODE_ACCESS_DENY;
+  }
+
+  return NODE_ACCESS_IGNORE; */
+
+}

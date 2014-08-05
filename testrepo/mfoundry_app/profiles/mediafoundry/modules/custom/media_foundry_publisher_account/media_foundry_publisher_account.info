@@ -1,0 +1,15 @@
+name = Media Foundry Publisher Account
+description = "Custom module for creating default Publisher Admin user with content for Publisher Account"
+core = 7.x
+
+dependencies[] = ctools
+dependencies[] = features
+dependencies[] = publisher
+dependencies[] = strongarm
+dependencies[] = uuidrole
+dependencies[] = uuid_features
+dependencies[] = user_roles
+__drupal_alter_by_ref[][node][publisher] = publisher
+features[ctools][] = strongarm:strongarm:1
+features[features_api][] = api:2
+features[uuid_node][] = 240d0884-3082-422d-9cdf-21e4564ff0af

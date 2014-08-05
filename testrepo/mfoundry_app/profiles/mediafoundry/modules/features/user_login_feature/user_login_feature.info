@@ -1,0 +1,10 @@
+name = User Login Feature
+description = User Login Feature
+core = 7.x
+package = Features
+version = 7.x-1.0
+project = user_login_feature
+dependencies[] = fe_block
+features[fe_block_boxes][] = user_login
+features[fe_block_settings][] = block-user_login
+features[features_api][] = api:2

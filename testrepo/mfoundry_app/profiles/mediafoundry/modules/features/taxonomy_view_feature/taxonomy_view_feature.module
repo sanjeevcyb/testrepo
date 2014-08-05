@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Manage blog feature.
+ */
+
+include_once 'taxonomy_view_feature.features.inc';

@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Tags in Tags feature.
+ */
+
+include_once 'tags_in_tags.features.inc';

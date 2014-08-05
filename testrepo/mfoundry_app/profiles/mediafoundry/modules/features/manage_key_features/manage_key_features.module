@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Manage Key Features feature.
+ */
+
+include_once 'manage_key_features.features.inc';

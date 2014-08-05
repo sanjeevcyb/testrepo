@@ -1,0 +1,5 @@
+<?php
+
+function publisher_dashbaord_with_main_menu_enable(){
+  db_query("UPDATE `system` SET `weight` = 9994 WHERE `name` = 'publisher_dashbaord_with_main_menu'");
+}

@@ -1,0 +1,5 @@
+name = Media Foundry Block
+description = Custom module for media foundry blocks.
+package = Custom
+core = 7.x
+

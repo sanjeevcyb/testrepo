@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Sitemap Feature feature.
+ */
+
+include_once 'sitemap_feature.features.inc';

@@ -1,0 +1,155 @@
+name = Mediafoundry
+description = Install with commonly used features pre-configured.
+version = VERSION
+core = 7.x
+
+; Drupal Core
+dependencies[] = node
+dependencies[] = block
+dependencies[] = color
+dependencies[] = comment
+dependencies[] = contextual
+dependencies[] = contact
+dependencies[] = dashboard
+dependencies[] = help
+dependencies[] = image
+dependencies[] = list
+dependencies[] = menu
+dependencies[] = number
+dependencies[] = options
+dependencies[] = path
+dependencies[] = taxonomy
+dependencies[] = dblog
+dependencies[] = search
+dependencies[] = shortcut
+dependencies[] = field_ui
+dependencies[] = file
+dependencies[] = rdf
+dependencies[] = total_control
+
+; Drupal Contributed module
+dependencies[] = acl
+dependencies[] = admin_menu
+dependencies[] = admin_menu_toolbar
+dependencies[] = workbench
+dependencies[] = workbench_moderation
+dependencies[] = tagclouds
+dependencies[] = devel
+dependencies[] = module_filter
+dependencies[] = nodeblock
+dependencies[] = ctools
+dependencies[] = entity
+dependencies[] = remember_me
+dependencies[] = total_control
+dependencies[] = panels
+dependencies[] = piwik
+dependencies[] = simple_fb_connect
+dependencies[] = commerce_pdm
+dependencies[] = jw_player
+
+dependencies[] = uuid
+dependencies[] = uuid_features
+dependencies[] = uuidrole
+dependencies[] = taxonomy_feature
+
+dependencies[] = commerce_autosku
+dependencies[] = commerce_authnet
+dependencies[] = commerce_backoffice_product
+dependencies[] = commerce_backoffice_content
+
+dependencies[] = domain_admin_user
+dependencies[] = domain_alias
+dependencies[] = domain_source
+dependencies[] = domain_strict
+dependencies[] = domain_theme
+dependencies[] = domain_views
+
+dependencies[] = event_display
+dependencies[] = front_page_slide_show
+dependencies[] = key_features
+dependencies[] = blog_feature
+dependencies[] = latest_news
+dependencies[] = live_evnt_content_type
+dependencies[] = media_video_content_type
+dependencies[] = publisher
+dependencies[] = quicktabs_tabstyles
+
+dependencies[] = catalogue_with_filter
+dependencies[] = menu_feature
+dependencies[] = tags_in_tags
+dependencies[] = workbench_feature
+dependencies[] = event_catalogue_feature
+dependencies[] = frontpageslide
+dependencies[] = homepage_block
+dependencies[] = homepageevents
+dependencies[] = homepagevideo
+dependencies[] = manage_blog
+dependencies[] = manage_key_features
+dependencies[] = manage_slide_show_images
+dependencies[] = manage_static_pages
+dependencies[] = media_listing_page
+dependencies[] = one_time_subscription
+dependencies[] = publisher_account
+dependencies[] = recent_post
+dependencies[] = menu_block_feature
+dependencies[] = related_video
+dependencies[] = time_based_subscription
+dependencies[] = publisher_dashbaord_with_main_menu
+dependencies[] = user_information
+dependencies[] = userinformation
+dependencies[] = view_blog
+dependencies[] = user_profile_feature
+dependencies[] = default_content_feature
+dependencies[] = media_foundry_blocks
+
+dependencies[] = metatag
+dependencies[] = metatag_opengraph
+dependencies[] = metatag_twitter_cards
+dependencies[] = metatag_feature
+
+dependencies[] = user_login_feature
+;dependencies[] = affiliate_home_page_block_feature
+
+dependencies[] = pathauto_feature
+dependencies[] = access_rules
+dependencies[] = captcha_feature
+dependencies[] = image_presets
+dependencies[] = product_variation_type_fields
+dependencies[] = secure_pages_feature
+dependencies[] = social_share
+dependencies[] = socialthumbnail
+dependencies[] = text_format_feature
+dependencies[] = twitter_login
+dependencies[] = user_roles
+dependencies[] = video_presets_feature
+dependencies[] = subscription_feature
+
+dependencies[] = domain_specific_tag_feature
+dependencies[] = taxonomy_view_feature
+dependencies[] = commerce_cart_view_override
+dependencies[] = cart_override_feature
+dependencies[] = permission_feature
+dependencies[] = webform_feature
+dependencies[] = appearance_features
+dependencies[] = sitemap_feature
+dependencies[] = commerce_rules_feature
+dependencies[] = dashboard_recent_updates_feature
+
+dependencies[] = affiliate_home_page_default_content_feature
+
+dependencies[] = media_foundry_live_event
+dependencies[] = media_foundry_blocks
+dependencies[] = media_foundry_user_helper
+dependencies[] = media_foundry_publisher_account
+
+;features[] = logo
+;features[] = node_user_picture
+;features[] = comment_user_picture
+;features[] = favicon
+;features[] = main_menu
+;features[] = secondary_menu
+
+; Information added by Drupal.org packaging script on 2014-05-23
+version = "7.28"
+project = "drupal"
+datestamp = "1399522731"

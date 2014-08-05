@@ -1,0 +1,794 @@
+<?php
+
+/**
+ * @file
+ * This file contains no working PHP code; it exists to provide additional
+ * documentation for doxygen as well as to document hooks in the standard
+ * Drupal manner.
+ */
+
+
+/**
+ * @defgroup restws RestWS module integrations.
+ *
+ * Module integrations with the restws module.
+ */
+
+/**
+ * @defgroup restws_hooks RestWS' hooks
+ * @{
+ * Hooks that can be implemented by other modules in order to extend restws.
+ */
+
+/**
+ * Define restws compatible resources.
+ *
+ * This hook is required in order to add new restws resources.
+ *
+ * @return array
+ *   An array of information about the module's provided resources.
+ *   The array contains a sub-array for each resource, with the resource name as
+ *   the key. Resource names may only contain lowercase alpha-numeric characters
+ *   and underscores and should be prefixed with the providing module name.
+ *   Possible attributes for each sub-array are:
+ *   - label: The label of the resource. Start capitalized.
+ *   - class: The name of the controller class for the resource. The class has
+ *     to implement the RestWSResourceControllerInterface. Required.
+ *   - menu_path: A relative path were the resource callback should lie. By
+ *     default the resource name will be used as menu path. Optional.
+ *
+ * @see UserResourceController
+ */
+function custom_ws_restws_resource_info() {
+    watchdog('inside','custom_ws_restws_resource_info');
+  return array(
+    'login' => array(
+      'label' => t('Login'),
+      'class' => 'CustomUserResourceController',
+      'menu_path' => 'login',
+    ),
+   'logout' => array(
+     'label' => t('Logout'),
+     'class' => 'CustomUserResourceController',
+     'menu_path' => 'logout',
+   ),
+    'register' => array(
+      'label' => t('Register'),
+      'class' => 'CustomUserResourceController',
+      'menu_path' => 'register',
+    ),
+    'account' => array(
+      'label' => t('Account'),
+      'class' => 'CustomUserResourceController',
+      'menu_path' => 'account',
+    ),
+    'forgotPassword' => array(
+      'label' => t('Forgot Password'),
+      'class' => 'CustomUserResourceController',
+      'menu_path' => 'forgotPassword',
+    ),
+    'changePassword' => array(
+      'label' => t('Forgot Password'),
+      'class' => 'CustomUserResourceController',
+      'menu_path' => 'changePassword',
+    ),
+    'socialLogin' => array(
+      'label' => t('Social Media Login'),
+      'class' => 'CustomUserResourceController',
+      'menu_path' => 'socialLogin',
+    ),
+  );
+}
+
+/**
+ * Alter available resource information.
+ *
+ * @param array $resource_info
+ *   Resource information as defined in custom_ws_restws_resource_info(). You can
+ *   move the path of a resouce by setting menu_info. In this example you'll
+ *   have to retrieve nodes from /mypath.json or /mypath/1.json.
+ *
+ * @see custom_ws_restws_resource_info()
+ */
+function custom_ws_restws_resource_info_alter(&$resource_info) {
+    watchdog('inside','custom_ws_restws_resource_info_alter');
+  $resource_info['login']['class'] = 'CustomUserResourceController';
+  $resource_info['login']['menu_path'] = 'login';
+  //$resource_info['logout']['class'] = 'CustomUserResourceController';
+  //$resource_info['logout']['menu_path'] = 'logout';
+  $resource_info['register']['class'] = 'CustomUserResourceController';
+  $resource_info['register']['menu_path'] = 'register';
+  $resource_info['account']['class'] = 'CustomUserResourceController';
+  $resource_info['account']['menu_path'] = 'account';
+}
+
+/**
+ * Define restws compatible formats.
+ *
+ * This hook is required in order to add new restws formats.
+ *
+ * @return array
+ *   An array of information about the module's provided formats.
+ *   The array contains a sub-array for each format, with the format name as
+ *   the key. Format names may only contain lowercase alpha-numeric characters
+ *   and underscores.
+ *   Possible attributes for each sub-array are:
+ *   - label: The label of the format. Start capitalized.
+ *   - class: The name of the class for the format. The class has to implement
+ *     the RestWSFormatInterface. Required.
+ *   - mime type: The official internet media type (MIME type) of the format.
+ *     Required.
+ */
+/*function custom_ws_restws_format_info() {
+  return array(
+    'json' => array(
+      'label' => t('JSON'),
+      'class' => 'RestWSFormatJSON',
+      'mime type' => 'application/json',
+    ),
+    'xml' => array(
+      'label' => t('XML'),
+      'class' => 'RestWSFormatXML',
+      'mime type' => 'application/xml',
+    ),
+  );
+}*/
+
+/**
+ * Alter available format information.
+ *
+ * @param array $format_info
+ *   Format information as defined in custom_ws_restws_format_info()
+ *
+ * @see custom_ws_restws_format_info()
+ */
+/*function custom_ws_restws_format_info_alter(&$format_info) {
+  $format_info['json']['class'] = 'MyJsonFormatHandler';
+}*/
+
+/**
+ * Alter the incoming request array.
+ *
+ * @param array $request
+ *   A request array that contains the following items:
+ *   - op: operation string, one of create, read, update or delete.
+ *   - format: object implementing RestWSFormatInterface.
+ *   - resource: object implementing RestWSResourceControllerInterface.
+ *   - id: resource identifier or NULL for the create operation.
+ *   - payload: array containing data attached to this request, if any.
+ */
+function custom_ws_restws_request_alter(array &$request) {
+ //print_r(arg(0));
+ //die();
+ //$token = drupal_get_token('restws');
+ //drupal_add_http_header('X_CSRF_TOKEN', $token);
+ //print_r($token);
+ //die('here...');
+  if($request['op']=='query')
+  {
+      $log = new CustomUserResourceController();
+      $log->read();
+  }
+
+    watchdog('inside','custom_ws_restws_request_alter');
+  if ($request['resource']->resource() == 'node') {
+    $request['format'] = restws_format('json');
+  }
+}
+/*
+ * Modify response for Account update
+ */
+function change_user_account_response($response)
+{
+   $modifiedResponse['status'] = "SUCCESS";
+   $modifiedResponse['userId'] = $response->uid;
+   //$modifiedResponse['sessionId'] = drupal_get_token('restws');
+   $modifiedResponse['userName'] = $response->name;
+  // $modifiedResponse['firstName'] = $response->field_first_name['und'][0]['value'];
+   //$modifiedResponse['lastName'] = $response->field_last_name['und'][0]['value'];
+   $modifiedResponse['emailId'] = $response->mail;
+   $modifiedResponse['userProfilePic'] = $response->picture->uri;
+
+ //$token = drupal_get_token('restws');
+ return $modifiedResponse;
+}
+/*
+ * Modify the response of registration
+ */
+function change_user_response($response)
+{
+ if(isset($response->uid))
+ {
+    $modifiedResponse['status'] = "SUCCESS";
+    $modifiedResponse['userId'] = $response->uid;
+    //$modifiedResponse['sessionId'] = $response['token'];
+    $modifiedResponse['userName'] = $response->name;
+    //$modifiedResponse['firstName'] = $response[0][''];
+    //$modifiedResponse['lastName'] = $response[0][''];
+    $modifiedResponse['emailId'] = $response->mail;
+    //$modifiedResponse['userProfilePic'] = $response->picture->uri;
+ }
+ else {
+    $modifiedResponse['status'] = "FAILED";
+ }
+    return $modifiedResponse;
+}
+/**
+ * Alter the outgoing response.
+ *
+ * @param mixed $response
+ *   The response data being returned by the REST service (not yet serialized).
+ *
+ * @param string $function
+ *   The function being called on the REST service.
+ *
+ * @param string $format
+ *   The name of the format serializing the response.
+ */
+function custom_ws_restws_response_alter(&$response, $function, $formatName) {
+    watchdog('inside','custom_ws_restws_response_alter');
+    //$response['resource'] = arg(0);
+    switch (arg(0)) {
+    case 'register':
+        $user = user_load($response['id']);
+        $response = change_user_response($user);
+        if(isset($response['userId']) && $response['userId'] > 0){
+         $response['sessionId'] = drupal_get_token('restws');
+        }
+        break;
+
+    case 'account':
+       $user = user_load($response['id']);
+       $response = change_user_account_response($user);
+       $response['sessionId'] =  drupal_get_token('restws');
+       break;
+
+    case 'login':
+        $user = user_load($response['id']);
+        $response = change_user_response($user);
+        if(isset($response['userId']) && $response['userId'] > 0){
+            $response['sessionId'] = drupal_get_token('restws');
+        }
+        break;
+
+    case 'user':
+       $user = user_load($response['uid']);
+       $response = change_user_response($user);
+       if(isset($response['userId']) && $response['userId'] > 0){
+        $response['sessionId'] = drupal_get_token('restws');
+       }
+       break;
+
+    case 'forgotPassword':
+       $user = user_load($response['id']);
+       $link = user_pass_reset_url($user);
+       $response = change_user_response($user);
+       $response['forgotPasswordMessage'] = "The forgot password email is send to the email address.";
+       $response['forgotPasswordLink'] = $link;
+       //$response = $user;
+      // print_r($response);
+       //die();
+        break;
+
+    case 'changePassword':
+         $user = user_load($response['id']);
+         $response = change_user_account_response($user);
+         $response['sessionId'] =  drupal_get_token('restws');
+    break;
+
+    default:
+        break;
+}
+
+  if ($function == 'viewResource' && $formatName == 'json') {
+    $response['site_name'] = variable_get('site_name', '');
+  }
+}
+
+/*
+ * Custom logout
+ */
+function custom_user_logout($values)
+{
+//  $token = drupal_get_token('restws');
+
+  //global $user;
+  $user = user_load($values['id']);
+
+  watchdog('user', 'Session closed for %name.', array('%name' => $user->name));
+
+  module_invoke_all('user_logout', $user);
+
+  // Destroy the current session, and reset $user to the anonymous user.
+  session_destroy();
+
+  drupal_goto();
+ die('logged out...');
+  return true;
+}
+
+
+/**
+ * @}
+ */
+function custom_user_changePassword($values)
+{
+ $account = user_load($values['userId']);
+ $oldPassword = $values['oldPassword'];
+ $newPassword = $values['newPassword'];
+ //To include password functins file
+ module_load_include('inc', 'content', 'includes/password');
+ watchdog('inside','custom_user_changePassword');
+
+ $check = user_check_password($oldPassword, $account);
+ watchdog('inside',$check);
+
+ try{
+  $user = new stdClass();
+  if($check == 1)
+  {
+    $data['pass'] = $newPassword;
+    $user->user =  user_save($account, $data);
+  }
+  return $user;
+ }catch(Exception $e){
+  //var_dump($e);exit;
+  $code =  $e->getCode();
+  $msg = $e->getMessage();
+  if($code =='23000'){
+   $msg = 'Username or Email id already present.';
+  }
+  throw new RestWSException($msg, $code);
+ }
+}
+
+/**
+ * @}
+ */
+function custom_user_account($values)
+{
+ try{
+        if(isset($values['name']))
+        {
+          if ( $error =  user_validate_name($values['name'])) {
+           throw new RestWSException($error, 302);
+          }
+          else{
+           $data['name'] = $values['name'];
+          }
+        }
+        $values['status'] = 1;
+
+        if(isset($values['userId']))
+        {
+         $account->uid = $values['userId'];
+         $account = user_load($account->uid);
+         if(isset($values['picture']))
+         {
+          $filepath = drupal_realpath($values['picture']);
+          $file = (object) array(
+            'uid' => 1,
+            'uri' => $filepath,
+            'filemime' => file_get_mimetype($filepath),
+            'status' => 1,
+          );
+
+           $file = file_copy($file, 'public://');
+
+           $data['picture'] = $file;
+         }
+         if(isset($values['firstName']))
+          $account->field_first_name['und'][0]['value'] = $values['firstName'];
+
+         if(isset($values['lastName']))
+          $account->field_last_name['und'][0]['value'] = $values['lastName'];
+
+         if(isset($values['phone']))
+          $account->field_phone['und'][0]['value'] = $values['phone'];
+
+         if(isset($values['organization']))
+          $account->field_organization['und'][0]['value'] = $values['organization'];
+
+         if(isset($values['address']))
+          $account->field_address['und'][0]['value'] = $values['address'];
+
+         if(isset($values['address2']))
+          $account->field_address_2_['und'][0]['value'] = $values['address2'];
+
+         if(isset($values['city']))
+          $account->field_city['und'][0]['value'] = $values['city'];
+
+         if(isset($values['country']))
+          $account->field_country['und'][0]['value'] = $values['country'];
+
+         if(isset($values['zip']))
+          $account->field_zip['und'][0]['value'] = $values['zip'];
+
+         if(isset($values['state']))
+          $account->field_state['und'][0]['value'] = $values['state'];
+
+         if(isset($values['description']))
+          $account->field_description['und'][0]['value'] = $values['description'];
+
+         $user->user =  user_save($account, $data);
+
+         //custom_user_login($account->name, $account->pass);
+         return $user;
+        }
+ }catch(Exception $e){
+  //var_dump($e);exit;
+  $code =  $e->getCode();
+  $msg = $e->getMessage();
+  if($code =='23000'){
+   $msg = 'Username or Email id already present.';
+  }
+  throw new RestWSException($msg, $code);
+ }
+// return $user;
+}
+/**
+ * @}
+ */
+function custom_user_register($values)
+{
+ //print_r($values);
+    try{
+
+      if ($error =  user_validate_name($values['name'])) {
+        throw new RestWSException($error, 302);
+      }
+      if ($error =  user_validate_mail($values['mail'])) {
+        throw new RestWSException($error, 302);
+      }
+
+ $values['status'] = 1;
+ $account->is_new = true;
+ $user->user =  user_save($account, $values);
+
+ user_load($user->user->uid);
+
+//  $session_id = session_id();
+
+//  $num_updated = db_update('sessions')
+//  ->fields(array(
+//    'uid' => $user->user->uid,
+//  ))
+//  ->condition('sid', $session_id, '=')
+//  ->execute();
+
+    }catch(Exception $e){
+        //var_dump($e);exit;
+        $code =  $e->getCode();
+        $msg = $e->getMessage();
+        if($code =='23000'){
+           $msg = 'Username or Email id already present.';
+        }
+         throw new RestWSException($msg, $code);
+    }
+ return $user;
+ watchdog('user', 'Invalid login attempt for %username.', array('%username' => $username));
+}
+/*
+ * For the Forgot Password
+ */
+function custom_user_forgotPassword($values)
+{
+ watchdog('inside', 'custom_user_forgotPassword');
+
+ $account = user_load_by_mail($values['email']);
+ if(isset($account->uid))
+ {
+   $language = new stdClass();
+   $language->language = 'en';
+   $language->name = 'English';
+   $language->native = 'English';
+   $language->direction = 0;
+   $language->enabled = 1;
+   $language->plurals = 0;
+   $language->dir = 'ltr';
+   $language->weight = 0;
+
+   // Mail one time login URL and instructions using current language.
+   $mail = _user_mail_notify('password_reset', $account, $language);
+   //$link = user_pass_reset_url($account);
+$user->user = $account;
+
+   if (!empty($mail)) {
+    watchdog('response',$mail);
+    watchdog('user', 'Password reset instructions mailed to %name at %email.', array('%name' => $account->name, '%email' => $account->mail));
+
+   return $user;
+   }
+ }
+ else{
+  throw new RestWSException('Sorry, '.$values['email'].' is not recognized as a user name or an e-mail address.', 406);
+ }
+}
+/**
+ * @}
+ */
+function custom_user_login($values)
+{
+    $username = $values['name'];
+    $password = $values['pass'];
+    $return = new stdClass();
+    global $user;
+
+ watchdog('inside','custom_user_login');
+  if ($user->uid) {
+    // user is already logged in
+      throw new RestWSException('Already logged in as '.$username, 406);
+  }
+
+  // Check if account is active.
+  if (user_is_blocked($username)) {
+      throw new RestWSException('The username '.$username.' has not been activated or is blocked', 406);
+  }
+
+  $uid = user_authenticate($username, $password);
+
+  if ($uid) {
+    $user = user_load($uid);
+    if ($user->uid) {
+      user_login_finalize();
+
+
+      $return->sessid = session_id();
+      $return->session_name = session_name();
+
+      // Remove the users password from the account object.
+      unset($user->pass);
+      if (!user_access('administer users')) {
+        //unset($user->mail);
+        unset($user->init);
+      }
+
+      $return->user = $user;
+      return $return;
+    }
+  }
+
+  watchdog('user', 'Invalid login attempt for %username.', array('%username' => $username));
+}
+/**
+ * Example controller class for the mymodule_book resource.
+ */
+class CustomUserResourceController implements RestWSResourceControllerInterface {
+ //To store token
+ //public $token = '';
+  /**
+   * @see custom_ws_entity_property_info()
+   * @see RestWSResourceControllerInterface::propertyInfo()
+   */
+  public function propertyInfo() {
+    return array(
+      'properties' => array(
+        'name' => array(
+          'type' => 'text',
+          'label' => t('Name'),
+          'setter callback' => 'entity_property_verbatim_set',
+        ),
+      ),
+    );
+  }
+
+  /**
+   * @see RestWSResourceControllerInterface::wrapper()
+   */
+  public function wrapper($id) {
+
+    watchdog('inside','wrapper');
+    $book = user_load($id);
+    $info = $this->propertyInfo();
+    return entity_metadata_wrapper(arg(0), $book, array('property info' => $info['properties']));
+  }
+
+  /**
+   * @see RestWSResourceControllerInterface::create()
+   */
+  public function create(array $values) {
+    watchdog('inside','create');
+    // get resource name
+    $funct = arg(0);
+    // build desire function
+    $function = 'custom_user_'.$funct;
+
+     try {
+          if(arg(0)=='forgotPassword' && $user==1)
+          {
+            $user = $function($values);
+            return $user;
+          }
+          else
+          {
+           $user = $function($values);
+           return $user->user->uid;
+          }
+    }
+    catch (Exception $e) {
+
+      throw new RestWSException($e->getMessage(), $e->getCode());
+    }
+  }
+
+  /**
+   * @see RestWSResourceControllerInterface::read()
+   */
+  public function read($id=null) {
+    watchdog('inside','read');
+    return custom_user_logout($id);
+  }
+
+  /**
+   * @see RestWSResourceControllerInterface::update()
+   */
+  public function update($id, array $values) {
+    watchdog('inside','update');
+    $values['userId'] = $id;
+
+   // $this->token = drupal_get_http_header('X_CSRF_TOKEN');
+    //watchdog('token','<pre>'.drupal_get_http_header('X-CSRF-TOKEN').'</pre>');
+    $funct = arg(0);
+    // build desire function
+    $function = 'custom_user_'.$funct;
+
+     try {
+        $user = $function($values);
+        return $user->user->uid;
+    }
+    catch (Exception $e) {
+
+      throw new RestWSException($e->getMessage(), $e->getCode());
+    }
+  }
+
+  /**
+   * @see RestWSResourceControllerInterface::delete()
+   */
+  public function delete($id) {
+    try {
+      mymodule_book_delete($id);
+    }
+    catch (Exception $e) {
+      throw new RestWSException('Book not found', 404);
+    }
+  }
+
+  /**
+   * @see RestWSResourceControllerInterface::access()
+   */
+  public function access($op, $id) {
+    watchdog('inside','access');
+    return true;
+  }
+
+  /**
+   * @see RestWSResourceControllerInterface::resource()
+   */
+  public function resource() {
+    watchdog('inside','resource');
+    return arg(0);
+  }
+}
+
+function custom_user_socialLogin($values)
+{
+ watchdog('custom_user_socialLogin','here...');
+    //$facebook = facebook_client();
+   if (simple_fb_connect_facebook_client_load_include()) {
+      $init_params = array(
+        'appId' => $values['appId'], //'729559190409949',//variable_get('simple_fb_connect_appid', ''),
+        'secret' => $values['secret'], //'c382d64b206ca19184fb6679b937d000',//variable_get('simple_fb_connect_skey', ''),
+      );
+   }
+
+ //$access_token = "BAAUdrbCZAbBgBACyjhRjymEO1P7TjZBVkBZC7u8RZA53JNZB5IrWiMlUS7HJmwTL7uzzhrazjBNJAsnEyRhRAZBBxLyFNLyOz7jBvkC0ZBoZB32LEJ2tnSvCsdwmranepzHouRGLnfiskopmWHunQ59F7ZAmZAfxbJQjMdOetfHEN6FVYa8rpWXtacG8EUzMXoZA93LZBe0KPYCaTrBHUN1gGvnl5RnmwpINf98ZD";
+ $access_token = $values['access_token'] ; //"CAAKXh7xjEt0BAHWPeMdHzxnIstmlt0W2Q0ZA2tkuHl8gRSbe59Fc7WWkxAkGYa3loGNGpqQCVjAAm0iudNZCZATnhXZCUwyalX3xXpGIBg1MZCKGbK4LrCunOZAZBg3JzD4O6jfOHVWtfXBQZAvZAnsukuL7depOVETZABMbEQv4IZCQMUVDwEPvZBeRLC6sLxN4w1GFUSFSQ4dgMVhJON3peyVr";
+ $user_details = "https://graph.facebook.com/me?access_token=" .$access_token;
+
+ $response = file_get_contents($user_details);
+ $response = json_decode($response);
+
+    $facebook = new Facebook($init_params);
+
+    //$acc = $facebook->getAccessToken();
+    $fb_user = $response->id; //$facebook->getUser();
+    watchdog('access token','<pre>'.$fb_user.'</pre>');
+    if ($fb_user) {
+     watchdog('socialLogin','if...');
+      $fb_user_profile = $facebook->api('/me');
+      watchdog('access token','<pre>'.$fb_user_profile['email'].'</pre>');
+      $query = db_select('users', 'u');
+      $query->condition('u.mail', check_plain($fb_user_profile['email']));
+      $query->fields('u', array('uid'));
+      $query->range(0, 1);
+
+      $drupal_user_id = 0;
+      $result = $query->execute();
+      foreach ($result as $record) {
+        $drupal_user_id = $record->uid;
+      }
+
+      if ($drupal_user_id) {
+     watchdog('socialLogin','if...if');
+        $user_obj = user_load($drupal_user_id);
+
+        //print_r($user_obj);
+        //die();
+
+        if ($user_obj->status) {
+          $form_state = array();
+          $form_state['uid'] = $user_obj->uid;
+          user_login_submit(array(), $form_state);
+         // drupal_set_message(t('You have been logged in with the username !username', array('!username' => $user_obj->name)));
+        }
+        else {
+     watchdog('socialLogin','if...else');
+          //drupal_set_message(t('You could not be logged in as your account is blocked. Contact site administrator.'), 'error');
+        }
+       // drupal_goto('user');
+      }
+      else {
+     watchdog('socialLogin','else...');
+        if (!variable_get('simple_fb_connect_login_only', 0)) {
+
+         watchdog('socialLogin','simple_fb_connect_login_only...');
+          //create the drupal user
+          //This will generate a random password, you could set your own here
+          $drupal_username_generated = simple_fb_connect_unique_user_name(check_plain($fb_user_profile['username']));
+          watchdog('drupal_username_generated','<pre>'.$drupal_username_generated.'</pre>');
+          $password = user_password(8);
+          //set up the user fields
+          $fields = array(
+            'name' => $drupal_username_generated,
+            'mail' => check_plain($fb_user_profile['email']),
+            'pass' => $password,
+            'status' => 1,
+            'init' => 'email address',
+            'roles' => array(
+              DRUPAL_AUTHENTICATED_RID => 'authenticated user',
+            ),
+          );
+          if (variable_get('user_pictures', 0)) {
+            $dimensions_in_text = variable_get('user_picture_dimensions', SIMPLE_FB_CONNECT_DEFAULT_DIMENSIONS_STRING);
+            $dimensions = explode('x', $dimensions_in_text);
+            if (count($dimensions) == 2) {
+              $width = $dimensions[0];
+              $height = $dimensions[1];
+            }
+            else {
+              $width = SIMPLE_FB_CONNECT_DEFAULT_WIDTH;
+              $height = SIMPLE_FB_CONNECT_DEFAULT_HEIGHT;
+            }
+            $pic_url = "https://graph.facebook.com/" . check_plain($fb_user_profile['username']) . "/picture?width=$width&height=$height";
+            $response = drupal_http_request($pic_url);
+            $file = 0;
+            if ($response->code == 200) {
+              $file = file_save_data($response->data);
+            }
+            if (is_object($file)) {
+              $fields['picture'] = $file->fid;
+            }
+          }
+
+
+          //the first parameter is left blank so a new user is created
+          $account = user_save('', $fields);
+          // If you want to send the welcome email, use the following code
+          // Manually set the password so it appears in the e-mail.
+          $account->password = $fields['pass'];
+          // Send the e-mail through the user module.
+          drupal_mail('user', 'register_no_approval_required', $account->mail, NULL, array('account' => $account), variable_get('site_mail', 'admin@drupalsite.com'));
+          //drupal_set_message(t('You have been registered with the username !username', array('!username' => $account->name)));
+          //drupal_goto("user/simple-fb-connect");
+        }
+        else {
+          //drupal_set_message(t('There was no account with the email addresse !email found. Please register before trying to login.', array('!email' => check_plain($fb_user_profile['email']))), 'error');
+          //drupal_goto("user");
+        }
+      }
+    }
+    else {
+         watchdog('socialLogin','main else...');
+    }
+}

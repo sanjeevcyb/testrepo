@@ -1,0 +1,15 @@
+name = Appearance Features
+description = Appearance Features
+core = 7.x
+package = Features
+version = 7.x-1.0
+project = appearance_features
+dependencies[] = ctools
+dependencies[] = strongarm
+features[ctools][] = strongarm:strongarm:1
+features[features_api][] = api:2
+features[variable][] = theme_affiliate_theme_one_files_directory
+features[variable][] = theme_affiliate_theme_one_settings
+features[variable][] = theme_default
+features[variable][] = theme_media_foundry_publisher_files_directory
+features[variable][] = theme_media_foundry_publisher_settings

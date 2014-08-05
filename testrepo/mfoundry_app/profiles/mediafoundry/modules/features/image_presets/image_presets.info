@@ -1,0 +1,16 @@
+name = Image Presets
+description = image_presets
+core = 7.x
+package = Features
+version = 7.x-1.0
+project = image_presets
+dependencies[] = image
+features[features_api][] = api:2
+features[image][] = affiliate_homepage_videotab
+features[image][] = cart_thnumbnail
+features[image][] = catalogue_list
+features[image][] = frontpage_slideshow
+features[image][] = frontpage_slideshow_image
+features[image][] = homepage_freeevents
+features[image][] = imageicons
+features[image][] = userinformation

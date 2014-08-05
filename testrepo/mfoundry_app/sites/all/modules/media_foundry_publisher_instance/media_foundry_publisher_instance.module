@@ -1,0 +1,51 @@
+<?php
+
+/**
+ * @file
+ * This module is used to generate publisher instances & handle publisher general features.
+ */
+
+define("MEDIA_FOUNDRY_PUBLISHER_INSTANCE_GENERATION_ACCESS", "publisher instance generation access");
+
+/**
+ * Implements hook_init().
+ */
+function media_foundry_publisher_instance_init() {
+
+}
+/**
+ * Implements hook_permission().
+ */
+function media_foundry_publisher_instance_permission() {
+  return array(
+      MEDIA_FOUNDRY_PUBLISHER_INSTANCE_GENERATION_ACCESS => array(
+          'title' => t('publisher instance generation access'),
+          'description' => t('Allow user to create publisher instance and handle publisher features configuration')
+      )
+  );
+}
+/**
+ * Implements of hook_menu().
+ */
+function media_foundry_publisher_instance_menu() {
+  $items = array();
+  $items['admin/config/publisher/create'] = array(
+      'title' => 'Create Publisher Instance',
+      'description' => 'Create publisher instance',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('media_foundry_publisher_instance_creation_form'),
+      'file' => 'media_foundry_publisher_instance.admin.inc',
+      'access arguments' => array(MEDIA_FOUNDRY_PUBLISHER_INSTANCE_GENERATION_ACCESS),
+  );
+  return $items;
+}
+
+/**
+ * Implements of hook_form_alter().
+ */
+function media_foundry_publisher_instance_form_alter(&$form, &$form_state, $form_id) {
+  dpm($form_id);
+ /* if($form_id == "media_foundry_publisher_configuration_restriction") {
+	unset($form['domain_settings']);
+  } */
+}

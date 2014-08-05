@@ -1,0 +1,7 @@
+name = Media foundry publisher instance
+description = "Create a publisher instance"
+package = Custom
+core = 7.x
+files[] = media_foundry_publisher_instance.module
+
+

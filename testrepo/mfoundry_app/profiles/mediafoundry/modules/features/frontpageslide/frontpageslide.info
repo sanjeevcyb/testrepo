@@ -1,0 +1,15 @@
+name = FrontPageSlide
+core = 7.x
+package = Features
+version = 7.x-1.0
+project = frontpageslide
+dependencies[] = ctools
+dependencies[] = fe_block
+dependencies[] = flexslider_views
+dependencies[] = front_page_slide_show
+dependencies[] = views
+dependencies[] = views_ui
+features[ctools][] = views:views_default:3.0
+features[fe_block_settings][] = views-FrontPageSlide-block
+features[features_api][] = api:2
+features[views_view][] = FrontPageSlide

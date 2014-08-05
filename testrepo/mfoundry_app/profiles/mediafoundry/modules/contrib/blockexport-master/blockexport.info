@@ -1,0 +1,7 @@
+name = Block Export
+description = Allows users to Export and Import user defined blocks. 
+core = 7.x
+version = "7.x-1"
+core = "7.x"
+project = "blockexport"
+datestamp = "1265402405"

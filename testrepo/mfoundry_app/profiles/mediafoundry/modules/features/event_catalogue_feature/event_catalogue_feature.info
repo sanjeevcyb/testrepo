@@ -1,0 +1,17 @@
+name = Event Catalogue Feature
+description = Event Catalogue Feature
+core = 7.x
+package = Features
+version = 7.x-1.0
+project = event_catalogue_feature
+dependencies[] = better_exposed_filters
+dependencies[] = fe_block
+dependencies[] = quicktabs
+dependencies[] = views
+features[ctools][] = quicktabs:quicktabs:1
+features[ctools][] = views:views_default:3.0
+features[fe_block_settings][] = quicktabs-event_catalogue_page
+features[features_api][] = api:2
+features[quicktabs][] = event_catalogue_page
+features[views_view][] = event_catalogue_with_filter
+features_exclude[dependencies][ctools] = ctools

@@ -1,0 +1,7 @@
+name = Custom Node Resource web services
+description = Provides Custom Node to RESTful web services.
+core = 7.x
+
+files[] = custom_node.module
+dependencies[] = restws
+dependencies[] = entity

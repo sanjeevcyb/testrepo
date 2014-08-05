@@ -1,0 +1,27 @@
+<?php
+/* hook_install to create a default publisher admin user */
+
+function media_foundry_publisher_account_install() {
+    $query = db_select('role', 'r');
+    $query->fields('r', array('rid'))->condition('r.uuid', '6c2a7bdd-0f5c-4c75-b20d-7c7ca2f2c4a4','=');
+    $result = $query->execute();
+    $get_rid = $result->fetchObject();
+
+    $fields = array(
+        'name' => 'mfpubadmin',
+        'mail' => 'admin@hostworks.com',
+        'pass' => '123456',
+        'status' => 1,
+        'init' => 'email address',
+        'roles' => array(
+            DRUPAL_AUTHENTICATED_RID => 'authenticated user',
+            $get_rid->rid => 'Publisher Admin'
+        ),
+    );
+    user_save('', $fields);
+}
+
+/* Set weight of the module */
+function media_foundry_publisher_account_enable(){
+  db_query("UPDATE `system` SET `weight` = 999995 WHERE `name` = 'media_foundry_publisher_account'");
+}

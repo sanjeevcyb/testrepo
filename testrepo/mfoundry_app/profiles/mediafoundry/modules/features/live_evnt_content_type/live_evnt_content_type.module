@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the live evnt content type feature.
+ */
+
+include_once 'live_evnt_content_type.features.inc';

@@ -1,0 +1,126 @@
+
+/*******************************SEARCH PAGE **************************************/
+
+.page-search #columns .search-form input[type=submit]
+{
+	float: none;
+	padding: 11px 20px;
+}
+
+
+
+.page-search #columns .search-form label
+{
+	color: #6C6C6C;
+	font-size: 16px;
+	margin-right: 12px;
+}
+
+.page-search #columns .search-form #edit-keys
+{
+	width: 25%;
+	height: 40px;
+	border: 1px solid #bcbcbc;
+	text-indent: 10px;
+	color: #bcbcbc;
+}
+
+.page-search #columns .search-form #edit-advanced input[type=text]
+{
+	width: 95%;
+	height: 40px;
+	border: 1px solid #bcbcbc;
+	text-indent: 10px;
+	color: #bcbcbc;
+}
+
+.page-search #columns #block-system-main .node-results .title a
+{
+	color: #0067FF;
+	font-size:16px;
+}
+
+.page-search #block-system-main
+{
+	color:#6C6C6C;
+}
+
+.page-search .search-snippet-info .search-info a
+{
+	color: #6C6C6C;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+.page-search #content ol
+{
+	 max-width: 839px;
+}
+
+.page-search #columns #block-system-main h2
+{
+	border-bottom: 1px solid #666666;
+    clear: both;
+    margin-bottom: 20px;
+    width: 100%;
+	color: #DC7110;
+    font-size: 30px;
+    font-weight: normal;
+    height: 50px;
+    line-height: 45px;
+}
+
+.page-search #content ol li
+{
+	border-bottom: 1px solid #CCCCCC;
+    margin-bottom: 5%;
+    max-width: 100%;
+    padding-bottom: 14px;
+}
+
+.search-form li.image-style-thumbnail
+{
+    max-width: 269px;
+    width: 22%;
+}
+
+.page-search #search-form .title a
+{
+	color: #0067FF;
+    font-size: 16px;
+}
+.page-search #main-content-header #page-title
+{
+	text-indent:none;
+}
+
+.page-search .node-results .image-style-thumbnail
+{
+	float: left;
+	margin-right: 4%;
+}
+
+.page-search  #edit-advanced .fieldset-legend a
+{
+	color: #6C6C6C;
+    font-size: 16px;
+    margin-right: 12px;
+}
+
+.page-search  #edit-advanced .fieldset-legend
+{
+	background:none;
+	padding:0px;
+}
+
+.page-search  #edit-advanced 
+{
+	border:none;
+	padding: 0;
+	margin-top: 1%;
+}
+
+.page-search .search-advanced #edit-submit--5
+{
+	width:95%;
+}
+

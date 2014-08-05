@@ -1,0 +1,16 @@
+name = Text Format Feature
+description = Text Format Feature
+core = 7.x
+package = Features
+version = 7.x-1.0
+project = text_format_feature
+dependencies[] = filter
+features[features_api][] = api:2
+features[filter][] = blog_text_format
+features[filter][] = custom_text_format
+features[filter][] = filtered_html
+features[filter][] = full_html
+features[filter][] = plain_text
+features[filter][] = static_page_
+features_exclude[dependencies][domain] = domain
+features_exclude[dependencies][features] = features

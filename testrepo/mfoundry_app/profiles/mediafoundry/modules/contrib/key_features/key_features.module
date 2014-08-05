@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Key Features feature.
+ */
+
+include_once 'key_features.features.inc';

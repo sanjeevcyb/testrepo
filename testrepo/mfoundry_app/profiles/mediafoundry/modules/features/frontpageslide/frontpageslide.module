@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the FrontPageSlide feature.
+ */
+
+include_once 'frontpageslide.features.inc';

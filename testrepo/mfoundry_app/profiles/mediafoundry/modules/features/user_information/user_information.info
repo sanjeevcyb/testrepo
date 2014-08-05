@@ -1,0 +1,14 @@
+name = User Information
+description = User Information
+core = 7.x
+package = Features
+version = 7.x-1.0
+project = user_information
+dependencies[] = ctools
+dependencies[] = views
+dependencies[] = views_ui
+features[ctools][] = views:views_default:3.0
+features[fe_block_settings][] = views-user_information-block
+features[features_api][] = api:2
+features[views_view][] = user_information
+features_exclude[dependencies][fe_block] = fe_block

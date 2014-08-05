@@ -1,0 +1,5 @@
+<?php
+
+function commerce_rules_feature_enable(){
+  db_query("UPDATE `system` SET `weight` = 99999 WHERE `name` = 'commerce_rules_feature'");
+}

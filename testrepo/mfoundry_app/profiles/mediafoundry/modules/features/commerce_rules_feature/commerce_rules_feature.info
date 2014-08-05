@@ -1,0 +1,14 @@
+name = Commerce Rules Feature
+description = Commerce Rules Feature
+core = 7.x
+package = Features
+version = 7.x-1.0
+project = commerce_rules_feature
+dependencies[] = commerce_cart
+dependencies[] = entity
+dependencies[] = rules
+features[features_api][] = api:2
+features[rules_config][] = rules_cart_redirect
+features[rules_config][] = rules_order_status_on_checkout
+features_exclude[dependencies][commerce_checkout] = commerce_checkout
+features_exclude[dependencies][commerce_order] = commerce_order

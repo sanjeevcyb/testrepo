@@ -1,0 +1,5 @@
+name = media_foundry_user_helper
+description = Test module for user management
+package = Drupal 7 Development
+core = 7.x
+files[] = media_foundry_user_helper.module

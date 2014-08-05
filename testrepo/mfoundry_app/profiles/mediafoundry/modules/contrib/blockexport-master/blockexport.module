@@ -1,0 +1,207 @@
+<?php
+
+function blockexport_menu(){
+ $items['admin/structure/export-block'] = array(
+    'title' => 'Export Blocks',
+    'description' => 'Block Export Page',
+    'page callback' => 'drupal_get_form',
+	'page arguments' => array('blockexport_export_blocks_form'),
+    'access arguments' => array('administer blocks'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+
+  $items['admin/structure/export-block/export'] = array(
+    'title' => 'Export',
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => -10,
+  );
+
+  $items['admin/structure/export-block/import'] = array(
+    'title' => 'Import',
+    'description' => 'Page to import blocks',
+    'page callback' => 'drupal_get_form',
+	'page arguments' => array('blockexport_import_blocks_form'),
+    'access arguments' => array('administer blocks'),
+    'type' => MENU_LOCAL_TASK,
+  );
+	return $items;
+}
+
+
+function blockexport_export_blocks_form($form, &$form_state) {
+drupal_add_css('sites/all/modules/blockexport/blockexport.css');
+	if (empty($form_state['storage']['values'])) {
+	// Build form tree
+
+		//query for block data
+		$boxes = db_query('SELECT info, bid FROM {block_custom}');
+		foreach ($boxes as $box) {
+		
+			//$block_data[] =  $box->info;
+			$form[$box->bid] = array(
+		  		'#type' => 'checkbox',
+		  		'#title' => $box->info . ' ' . l(t('edit block'),'admin/structure/block/manage/block/'. $box->bid, array('attributes' => array('target' => '_blank', 'class' => 'edit-block'))),
+		    	);
+		
+			}
+	}
+	else{
+		
+		$exportdata = '';
+		$exportdata .= "\$block = array();" . "\n";
+		foreach($form_state['storage']['values'] as $key => $value){
+
+			if($value == '1'){
+				//query for block data
+				$boxes = db_query('SELECT * FROM {block_custom} WHERE bid = '. $key);
+				
+				foreach($boxes as $box){	
+					$exportdata .= "\$block[] = array(" . "\n";
+					//$exportdata .= 'array('. $box->info . ', ' .  $box->body . '),';
+					$exportdata .= "'bid' => '" . $box->bid . "'," . "\n";	
+					$exportdata .= "'info' => '" . $box->info . "'," . "\n";
+					$exportdata .= "'body' => '". addslashes($box->body) . "'," . "\n" ;
+					$exportdata .= "'format' => '". $box->format . "'," . "\n" ;
+					$exportdata .=  ");" . "\n" ;
+					}
+						
+			}	
+		}
+		
+		$form['export_code'] = array(
+			'#type' => 'textarea',
+			'#title' => 'Export Code',
+			'#default_value' => $exportdata ,
+			'#rows' => 30,
+		);
+	}
+	//checkboxes
+
+	$form['submit'] = array(
+	    '#type' => 'submit',
+	    '#value' => t('Export blocks'),
+	  );
+
+	  return $form;
+	}
+
+function blockexport_export_blocks_form_submit($form, &$form_state) {
+	if (empty($form_state['storage']['values'])) {
+      // if there is no previous values redraw for second step
+      $form_state['storage']['values'] = $form_state['values'];
+      $form_state['rebuild'] = true;
+   } 
+	else {
+      // Form is on the second step, process the data here…
+     
+   }
+}
+function blockexport_import_blocks_form($form, &$form_state){
+	if (empty($form_state['storage']['values'])) {
+		$form['import_code'] = array(
+			'#type' => 'textarea',
+			'#title' => 'Import blocks array code',
+			'#rows' => 30,
+		);
+	}
+		$form['submit'] = array(
+	    '#type' => 'submit',
+	    '#value' => t('Import blocks')
+	  );
+
+	  return $form;
+}
+function blockexport_import_blocks_form_submit($form, &$form_state) {
+	if (empty($form_state['storage']['values'])) {
+	$string = $form_state['values']['import_code'];
+	@eval($string);
+      // if there is no previous values redraw for second step
+      $form_state['storage']['values']['blocks'] =  $block;
+	  foreach($block as $block_data){
+	    if (empty($block_data['info'])) {
+				form_set_error('info', t('Please ensure that each block description is unique.'));
+			}
+		else{
+			blockexport_block_form_submit($block_data);
+		}
+	  
+	  }
+	  cache_clear_all();
+      $form_state['rebuild'] = true;
+	  
+	  
+	  
+	  
+   } 
+	else {
+      // Form is on the second step, process the data here…
+     
+   }
+}
+function blockexport_block_form_validate($form, &$form_state) {
+
+  if (empty($block_data['info'])) {
+    form_set_error('info', t('Please ensure that each block description is unique.'));
+  }
+}
+
+/**
+ * Save the new custom block.
+ */
+function blockexport_block_form_submit($block_data) {
+
+$message = "";
+$lookup = db_query("SELECT bid,info FROM {block_custom} WHERE bid =" . intval($block_data['bid']) . " AND info ='" . $block_data['info'] . "'");
+$updated = $lookup->rowCount();
+
+
+if($updated > 0){
+			$num_updated = db_update('block_custom') 
+  			->fields(array(
+    		'body' => stripslashes($block_data['body']),
+    		))
+  			->condition('bid', $block_data['bid'], '=')
+  			->execute();
+  			$message = "Block ID " . $num_updated . "Has been updated.";
+}
+
+else{
+
+		$new_block_id = db_insert('block_custom')
+	  	->fields(array(
+	    	'info' => $block_data['info'],
+	    	'body' => stripslashes($block_data['body']),
+	    	'format' => $block_data['format'],
+	  	))
+	  	->execute();
+
+
+  foreach (list_themes() as $key => $theme) {
+    if ($theme->status) {
+      	
+      	$new_block_id = db_insert('block')
+	  	->fields(array(
+	    	'module' => 'block',
+	    	'delta' => $new_block_id,
+	    	'theme' => $theme->name,
+	    	'status' => 0,
+	    	'weight' => 0,
+	    	'custom' => 0,
+	    	'visibility' => 0,
+	    	'title' => '',
+	    	'cache' => -1,
+	  	))
+	  	->execute();
+
+
+    }
+  }
+  $message = "Block '" . $block_data['info'] . "'' ID " . $new_block_id . "Has been created.";
+}
+
+  drupal_set_message(t($message));
+
+ // $form_state['redirect'] = 'admin/build/block';
+  return;
+}
+

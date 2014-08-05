@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Catalogue with filter feature.
+ */
+
+include_once 'catalogue_with_filter.features.inc';

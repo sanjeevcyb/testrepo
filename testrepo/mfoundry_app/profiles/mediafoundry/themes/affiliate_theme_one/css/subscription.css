@@ -1,0 +1,508 @@
+html, body {
+    height: 100%;
+    min-height: 100%;
+}
+/*****Subscription Pages*****/
+.node-type-event-display #columns #page-title
+{
+	   text-transform: capitalize;
+	   text-indent: 0;
+}
+.node-type-event-display #columns #content .field-name-field-subscription-type ul li a
+{
+	color: #6C6C6C;
+}
+
+.node-type-event-display #columns .node-event-display .commerce-add-to-cart .form-item-attributes-field-premium-node
+{
+	display:none;
+}
+.node-type-event-display #columns #content .field-name-field-subscription-type
+{
+	width:95%;
+	float:left;
+}
+.node-type-event-display #columns #content .field-name-field-subscription-type ul
+{
+	float: left;
+	padding: 0;
+	margin: 0;
+}
+
+.node-type-event-display #columns #content .field-name-field-subscription-type ul li
+{
+	margin:0px;
+	padding:0px;
+}
+.node-type-event-display #columns #content .commerce-product-title
+{
+	text-transform: capitalize;
+}
+
+.page-checkout #columns #commerce-checkout-form-checkout .country
+{
+	   width: 224px !important;
+}
+.page-checkout .fieldset-wrapper #payment-details #edit-commerce-payment-payment-details-credit-card-type
+{
+	    margin-left: -342px;
+    	width: 342px;
+}
+
+.view-commerce-cart-form tr, .view-commerce-cart-summary tr th
+{
+	color: #6C6C6C;
+}
+.page-checkout #columns #commerce-checkout-form-review #edit-commerce-payment-payment-details-credit-card-exp-month
+{
+	width:100px !important;
+	margin-left: -101px !important;
+	float: left;
+}
+.commerce-month-year-divider
+{
+	float: left;
+    margin: 0 10px;
+}
+
+.page-checkout #columns #commerce-checkout-form-review .form-item-commerce-payment-payment-details-credit-card-exp-year
+{
+	float: left;
+    margin: 0 !important;
+}
+.page-checkout #columns .form-item-commerce-payment-payment-details-credit-card-code
+{
+	clear:both;
+	margin-top:35px;
+}
+.page-checkout #columns #commerce-checkout-form-review #edit-commerce-payment-payment-details-credit-card-exp-month .styled-select
+{
+	float:left;
+}
+.page-checkout #columns #commerce-checkout-form-review .form-item-commerce-payment-payment-details-credit-card-exp-month .select-text,
+.page-checkout #columns #commerce-checkout-form-review .form-item-commerce-payment-payment-details-credit-card-exp-year .select-text
+{
+	width:102px !important;
+}
+
+.page-checkout #columns #commerce-checkout-form-review #edit-commerce-payment-payment-details-credit-card-exp-year
+{
+	width:100px !important;
+	margin-left: -101px;
+}
+
+.page-checkout #columns #commerce-checkout-form-review #edit-commerce-payment-payment-details-credit-card-code
+{
+	width:100px !important;
+}
+
+.page-checkout #columns #edit-checkout-completion-message
+{
+	color: #6C6C6C !important;
+    font-weight: bold !important;
+}
+
+.page-checkout #columns #page-title
+{
+	text-indent: 0%;
+}
+#edit-customer-profile-billing{
+	border:1px solid #b6b6b6 !important;
+}
+/*Alignment of Product Details page*/
+.field-name-field-category h2.field-label{
+	margin: 0;
+    padding: 0;
+}
+.node-type-event-display section.field-name-field-category{
+    margin-top: 10px;
+}
+
+.node-type-event-display .commerce-product-field-field-for-time
+{
+	float: left;
+    width: 100%;
+}
+.node-type-event-display .commerce-product-field-field-for-time h2
+{
+	float: left;
+    margin: 0;
+    width: auto;
+}
+.node-type-event-display .commerce-product-field-commerce-price .field-items .field-item
+{
+	/*color: #DC7110;*/
+    font-size: 18px;
+    font-weight: bold;
+    padding-top: 10px;
+}
+
+.node-type-event-display .commerce-add-to-cart
+{
+	float: left; 
+}
+
+.node-type-event-display .field-type-taxonomy-term-reference
+{
+	margin-bottom:0px !important;
+}
+
+.node-type-event-display .end-date-wrapper .form-type-date-popup label[for="edit-line-item-fields-field-start-date-und-0-value2"]
+{
+	display:none;
+}
+.node-type-event-display .field-name-field-subscription-type h2
+{
+	 float: left;
+    margin: 0;
+    width: auto;
+}
+.node-type-event-display .field-name-field-subscription-type ul li
+{
+	list-style-type:none !important;
+}
+.page-user-orders #block-system-main .field-name-commerce-customer-billing
+{
+	margin-left:15px; 
+}
+.node-type-event-display .category_title
+{
+	float:left;
+}
+.node-type-event-display .category_value
+{
+	line-height: 45px;
+	margin-left:6px;
+}
+.node-type-event-display .field-name-field-category
+{
+	display:none;
+}
+.node-type-event-display .event_display_desc
+{
+	/*margin: -1% 0;*/
+}
+/*****End of Subscription Pages*****/
+
+/*****User Profile Page*****/
+
+.page-user #columns .profile
+{
+	width:auto;
+	
+}
+.page-user #columns .profile .fieldset-wrapper .field
+{
+	float: left;
+    margin-bottom: 20px;
+    width: 50%;
+}
+
+.page-user #columns #page-title
+{
+	display:none;
+}
+.account-details
+{
+	background: none repeat scroll 0 0 #ECECEC;
+    color: #6C6C6C;
+    min-width: 320px;
+    padding-bottom: 26px;
+    padding-top: 30px;
+    width: 100%;
+}
+
+.account-details h3 {
+    /*color: #DC7110;*/
+    font-size: 29px;
+    font-weight: normal;
+    margin: 0 8px;
+}
+
+.user-profile-pic {
+    height: 160px;
+    width: 180px;
+    margin: 0 8px;
+}
+.border {
+    border: 1px solid #BEBEBE;
+}
+
+
+.detail-info {
+    margin-left: 2%;
+    width: 71%;
+}
+.user-name {
+    font-size: 24px;
+    line-height: 16px;
+    width: auto;
+}
+.user-name a
+{
+	color:#0099FF;
+}
+
+.email-ph {
+    color: #666666;
+    font-size: 14px;
+    margin-left: 12px;
+}
+.about-user {
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.page-user #columns #user_user_full_group_more_details
+{
+	border:none;
+	margin:0;
+	padding:0;
+}
+.page-user .history
+{
+	display:none;
+}
+/*.page-user #block-views-userinformation-block-1
+{
+	float:left;
+}*/
+.page-user #block-system-main
+{
+	clear:both;
+	width: 98%;
+}
+.page-user #columns legend
+{
+	display:none;
+}
+.page-user #columns #user_user_full_group_more_details .fieldset-wrapper,.page-user #columns .domain-status
+{
+	color: #666666;
+    float: left;
+    margin-left: 15px;
+    margin-top: 30px;
+    max-width: 960px;
+    width:100%;
+}
+.page-user .domain-status
+{
+	display:none;
+}
+/***arrange draggable blocks*****/
+.page-user #content
+{
+	position:relative;
+}
+.page-user #content .block-system.no-title
+{
+	/*left: 0;
+    position: absolute;
+    right: 0;
+    top: 450%;*/
+}
+
+.page-user-register #content .block-system.no-title,.page-user-edit #content .block-system.no-title,.not-logged-in #content .block-system.no-title {
+    left: 0;
+    right: 0;
+    top:0;
+    position: inherit !important;
+}
+/***arrange draggable blocks****/
+.page-user #columns .domain-status h3{
+	border: medium none;
+	/*color: #DC7110;*/
+    font-size: 22px;
+    font-weight: bold;
+    margin: 0 0 11px;
+}
+.page-user #columns .domain-status ul
+{
+	background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+.page-user #block-system-main ul
+{
+	background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+.page-user #block-system-main ul li
+{
+	list-style-type:none !important;
+	padding: 10px;
+}
+.page-user #block-system-main dt
+{
+	padding: 10px 10px;
+	margin-left: 10px;
+}
+.node-type-event-display section.field-name-field-category {
+    margin-bottom: -20px !important
+    margin-top: 10px;
+}
+.page-user #columns .domain-status ul li
+{
+	padding:15px 15px 14px;
+	border:none;
+	list-style: disc outside none;
+}
+.page-user #columns .user-picture img
+{
+	display:none;
+}
+.page-user .main-content
+{
+	margin:0;
+}
+.page-user #columns.set-width {
+    max-width: 100%;
+}
+.page-user #columns #content
+{
+	padding:20px 5px;
+}
+.page-user #main-content
+{
+	margin:0px;
+}
+
+.page-user #columns #user_user_full_group_more_details .fieldset-wrapper .field-name-field-description .field-item {
+    line-height: 20px;
+    margin-top: 10px;
+}
+.page-user #columns #user_user_full_group_more_details .fieldset-wrapper .field-label
+{
+	float: left;
+    margin: 0;
+}
+
+.page-user #columns #user_user_full_group_more_details .fieldset-wrapper .field-label
+{
+	float: left;
+    line-height: 40px;
+    width: 150px;
+}
+
+.page-user #columns #user_user_full_group_more_details .fieldset-wrapper .field-item
+{
+	text-indent: 10px;
+    /*width: 290px;*/
+    width:auto;
+    line-height:40px;
+    
+	
+}
+.page-user-edit #columns .fieldset-wrapper .field-type-text
+{
+	float: left;
+    margin-bottom: 20px;
+    width: 50%;
+}
+.page-user-edit #columns label
+{
+	float: left;
+    line-height: 40px;
+    width: 140px;
+}
+
+.page-user-edit .form-actions {
+    margin: 0 auto;
+    max-width: 1240px;
+}
+.page-user-edit #columns input[type="text"],.page-user-edit #columns input[type="password"]
+{
+	width:290px;
+	   border: 1px solid #BEBEBE;
+    color: #555555;
+    height: 40px;
+    text-indent: 10px;
+}
+.page-user-edit  #user-profile-form {
+    margin: 0 auto;
+    max-width: 1240px;
+}
+.page-user-edit #edit-picture {
+    margin-bottom: 20px;
+}
+.page-user-edit .password-parent,.page-user-edit .confirm-parent
+{
+	width: 49.3em;
+}
+select
+.page-user-edit #edit-account
+{
+	display:inline-block;
+	
+}
+.page-user-edit #edit-timezone
+{
+	 margin-bottom: 20px;
+}
+.page-user-edit .form-item .description
+{
+	margin-left:140px;
+}
+.page-user-edit #columns .fieldset-wrapper .form-item-field-description-und-0-value .grippie
+{
+	display:none;
+}
+.page-user-edit #columns .fieldset-wrapper  #field-description-add-more-wrapper .form-textarea-wrapper
+{
+	float: left;
+    width: 290px;
+}
+.page-node-101 #page #userprofile
+{
+	/*display:none !important;*/
+}
+.page-user #main-content
+{
+	margin-left:10px !important;
+}
+/*****User Profile Page*****/
+
+ul.primary {
+    padding: 0;
+}
+/**No Order***/
+.page-user .view-commerce-user-orders .view-empty p
+{
+	margin:2%;
+}
+/**No Order***/
+
+@media only screen and (min-width : 768px) and (max-width : 1024px){
+#edit-customer-profile-billing{
+	border:1px solid #b6b6b6 !important;
+}
+
+}
+@media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape) {
+  /* For landscape layouts only */
+  #edit-customer-profile-billing{
+	border:1px solid #b6b6b6 !important;
+}
+
+	
+}
+
+@media only screen  and (min-width : 767px) {
+	.page-node-101 #page #userprofile
+	{
+		/*display:none !important;*/
+	}
+}
+	
+@media only screen  and (max-width : 767px) {
+	.account-details {
+    min-width: 315px ;
+	}
+	
+	.detail-info {
+    margin-top: 5%;
+	}
+}
+
+@media only screen  and (max-width : 767px)and (orientation:landscape) {
+	.page-user #columns .profile .fieldset-wrapper .field {
+    width: 40%;
+}
+}

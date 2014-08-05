@@ -1,0 +1,15 @@
+name = Cart Override Feature
+description = Cart Override Feature
+core = 7.x
+package = Features
+version = 7.x-1.0
+project = cart_override_feature
+dependencies[] = commerce_cart_view_override
+dependencies[] = strongarm
+dependencies[] = views
+features[ctools][] = strongarm:strongarm:1
+features[ctools][] = views:views_default:3.0
+features[features_api][] = api:2
+features[variable][] = commerce_cart_view_override_page_view
+features[views_view][] = commerce_cart_form_custom
+features_exclude[dependencies][ctools] = ctools

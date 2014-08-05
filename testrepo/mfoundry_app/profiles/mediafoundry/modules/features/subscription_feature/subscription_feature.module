@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Subscription Feature feature.
+ */
+
+include_once 'subscription_feature.features.inc';

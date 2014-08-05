@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Domain Specific Tag Feature feature.
+ */
+
+include_once 'domain_specific_tag_feature.features.inc';

@@ -1,0 +1,13 @@
+name = User Roles
+description = User Roles
+core = 7.x
+package = Features
+version = 7.x-1.0
+project = user_roles
+dependencies[] = features
+dependencies[] = uuidrole
+features[features_api][] = api:2
+features[user_role][] = Affiliate Admin
+features[user_role][] = Publisher Admin
+features[user_role][] = Publisher Contributor
+features[user_role][] = Publisher Editor

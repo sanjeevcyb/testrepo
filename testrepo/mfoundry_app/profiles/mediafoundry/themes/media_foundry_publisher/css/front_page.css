@@ -1,0 +1,619 @@
+/*******HOME PAGE CSS ************/
+
+
+.not-logged-in  #logo img
+{
+	position:static;
+	top:0px;
+}
+
+.not-logged-in .block-nodeblock .node-banner{
+	margin-bottom:0px;
+}
+
+.not-logged-in .login-box{
+	margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+    width: 494px;
+}
+
+.forgot-password{
+	margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+    width: 258px;
+    display:none;
+}
+.forgot-password .form-actions
+{
+	float: left;
+	margin: 0px;
+}
+
+.not-logged-in #block-block-3 .block-content{
+	float:none !important;
+}
+
+.flexslider .slides img {
+    width: 100%;
+    display: compact; 
+ }
+
+
+.login-box .login div label
+{
+	display:none;
+}
+
+.login-box .login input[type="text"],  input[type="password"]
+{
+	 border: 1px solid #BFC0C0;
+    border-radius: 3px;
+    box-shadow: none;
+    color: #818181;
+    float: left;
+    font-family: 'segoe_uiregular';
+    font-size: 1em;
+	margin-right: 19px;
+    width: 200px !important;
+     margin-bottom: 10px;
+  }
+
+.forgot-password input[type="text"]
+{
+	border: 1px solid #BFC0C0;
+	border-radius: 3px;
+	box-shadow: none;
+	color: #818181;
+	font-family: 'segoe_uiregular';
+	font-size: 1em;
+	margin-right: 19px;
+	width: 291px !important;
+	margin-bottom: 14px;
+}
+
+.login label
+{
+	color: #474747;
+    font-size: 24px !important;
+    margin-bottom: 20px;
+}
+.login-box .item-list
+{
+	 float: left;
+  	  width: 442px;
+}
+
+.login-box .item-list ul
+{
+	list-style-type:none;
+	 margin-bottom: 34px;
+}
+
+.login-box .item-list ul li
+{
+	margin:0 !important;
+}
+
+.login-box .item-list ul li.even
+{
+	  float: right;
+}
+.form-item-remember-me input
+{
+	opacity:0;
+}
+
+.form-item-remember-me
+{
+	margin: 0px;
+	float: left;
+}
+
+
+.login-box .btn-signin input
+{
+	background: none repeat scroll 0 0 #E67900;
+    border: 0 none;
+    border-radius: 5px;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 15px;
+    padding: 6px 14px;
+    position: relative;
+    text-decoration: none;
+}
+
+#user-pass div p
+{
+	display:none;
+}
+
+
+
+
+.login-box  input[type="checkbox"]:checked + label {
+background-image: url("images/chk2.png");
+}
+
+body.html div#page.container div.region div.region-inner section#block-nodeblock-45.block div.block-inner div.block-content div#node-45.node
+{
+	   margin-bottom:0px;
+}
+
+body.html div#page.container div#columns.columns div#content-column.content-column div.content-inner div#main-content
+{
+	margin:0px;
+}
+
+body.html div#page.container div.region div.region-inner div#block-views-frontpageslide-block.block {
+    margin-bottom:0px;
+}
+
+
+.flex-nav-container
+{
+	margin-bottom:5px;
+}
+
+.not-logged-in #branding a 
+{
+	z-index: 10;
+	margin-top: 9px;
+	position: absolute;
+}
+
+/*.not-logged-in .nav
+{
+	margin: 5px 0;
+}*/
+
+.page-node-edit.node-type-video #content-column,.page-node-moderation #content-column
+{
+	width:100% !important;
+}
+
+/********HOME PAGE CSS END HERE****/
+
+
+/*************** CSS FOR MEDIA LISTING PAGE****************/
+
+.view-media-listing-page .views-exposed-form input[type="text"]
+{
+	width: 214px;
+}
+
+.page-medialist .view-media-listing-page .views-exposed-form .styled-select select {
+	cursor: pointer;
+	font-size: 14px; 
+	height: 40px;
+	margin-left: -133px;
+	opacity: 0; 
+	width: 132px;
+
+}
+
+.page-medialist .view-media-listing-page .views-exposed-form .select-text {
+width: 122px !important;
+}
+
+.page-medialist .view-media-listing-page .views-widget-filter-field_category_tid .views-widget select
+ {
+	height: 94px;
+ }
+/******** CSS FOR MEDIA LISTING PAGE ENDS HERE**********/
+
+
+#userprofile
+{
+	display:none;
+}
+
+#block-system-main .node-video .node-content .clear
+{
+	clear:both;
+}
+
+.page-medialist .view-media-listing-page .views-table th
+{
+	text-align:center;
+}
+
+.page-medialist .view-media-listing-page .views-table tr td
+{
+	text-align:center;
+}
+
+#block-block-5 > div > div.block-content.content > a
+{
+	display:none;
+}
+
+.node-type-video #columns > div.region.region-sidebar-second.sidebar
+{
+	
+	  margin-left:0px;
+}
+
+.node-type-video #content-column
+{
+	width: 703px;
+}
+
+.page-node-access #main-content
+{max-width:100%;}
+
+.node-type-live-event .content-inner
+{
+	margin-right:0px !important;
+}
+
+.node-type-live-event .region-sidebar-second
+{margin-left:0px;}
+
+.node-type-live-event.one-sidebar #content-column
+{
+	width:auto;
+}
+
+.page-node-edit.node-type-live-event.one-sidebar #content-column
+{
+	width:100% !important;
+}
+
+.node-type-live-event #comment-form #edit-comment-body
+{
+	display: inline-block;
+}
+
+.node-type-live-event #comment-body-add-more-wrapper .form-type-textarea
+{
+	margin-bottom:0px;
+	margin-top:0px;
+}
+
+.node-type-live-event .node-live-event #mediaplayer_wrapper
+{
+	background:none repeat scroll 0 0 #000;
+	width: 698px !important;
+}
+
+
+
+
+
+
+
+/************************TERMS AND CONDITIONS PAGE CSS****************/
+
+.page-node-322  #page-title
+{
+	display:none;
+}
+
+#content .term-wrap
+{
+	text-align:center;
+}
+
+#content .term-wrap h1
+{
+	  color: #DC7110;
+    font-size: 49px;
+    text-transform: uppercase;
+}
+
+#content .term-wrap h3
+{
+	color: #5F6466;
+    font-size: 21px;
+}
+
+#content.term-wrap h2
+{
+	  color: #5F6466;
+      font-size: 28px;
+}
+
+#content.term-wrap p
+{
+	color: #DC7110;
+    font-size: 20px;
+}
+
+#content .term-wrap p a
+{
+	font-weight: bold;
+    text-transform: uppercase;
+}
+
+
+/************************TERMS AND CONDITIONS PAGE CSS ENDS****************/
+
+/************************PRIVACY PAGE CSS****************/
+.page-node-251 #page-title
+{
+	display:none;
+}
+
+.full-wrap h1
+{
+	color: #DC7110;
+    font-size: 49px;
+    margin-top: 0;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.full-wrap .left-wrap
+{
+ 	 float: left;
+     padding-left: 16px;
+    padding-right: 19px;
+    width: 47%;
+}
+
+.full-wrap .right-wrap
+{
+	 float: left;
+    width: 47%;
+   
+}
+
+.full-wrap strong
+{
+	color: #DC7110;
+    font-size: 21px;
+}
+
+.full-wrap p
+{
+	color: #6C6C6C;
+    font-size: 16px;
+}
+
+
+/************************PRIVACY PAGE CSS ENDS****************/
+
+/******************** CSS FOR BUGS RAISED IN JIRA******************/
+
+.page-taxonomy-term .node-video .node-content .about-video
+{
+	width:698px;
+}
+
+.page-admin-config-media #video-preset-form .fieldset-wrapper #edit-audio-codec {
+	width: 65% !important;
+	margin-left: -774px;
+}
+
+#mediaplayer
+{
+	width:100%;
+}
+
+.video_rating
+{
+	width:100%;
+}
+
+/******************** CSS FOR BUGS RAISED IN JIRA ENDS******************/
+
+select::-ms-expand {
+    display: none;
+}
+
+/********CSS FOR PAGENATION FOR DASHBOARD EVENTS**********/
+
+.page-media-dashboard #quicktabs-publisher_dashboard_events_block .view-live-events .item-list
+{
+	    padding-left: 31px;
+   		 position: absolute;
+}
+
+.page-media-dashboard #quicktabs-publisher_dashboard_events_block .view-live-events .item-list .pager li {
+    border: 1px solid #BEBEBE;
+    float: left;
+    height: 33px;
+    line-height: 31px;
+    list-style: none outside none;
+    padding: 0;
+    text-align: center;
+    width: 64px;   
+}
+
+.page-media-dashboard #quicktabs-publisher_dashboard_events_block .view-live-events .item-list .pager li a{
+	 color: #6C6C6C;
+}
+
+.page-media-dashboard #quicktabs-publisher_dashboard_events_block .block-content
+{
+	position:relative;
+}
+
+
+
+/*******************FOR DROPDOWN ISSUE***********************/
+
+
+
+.jeditable-textfield form input {
+    height: 38px !important;
+    width: 258px !important;
+     background: none repeat scroll 0 0 #F4F4F4;
+    border: 1px solid #FFF;
+    color: #111111;
+    float: left;
+    line-height: 40px;
+     outline: medium none;
+    padding: 0 20px;
+    margin-left:-20px;
+    
+    }
+
+.jeditable-textfield form button
+{
+	background: none repeat scroll 0 0 #E67900 !important;
+	border: medium none;
+	color: #FFFFFF;
+	display: inline-block;
+	font-size: 14px;
+	font-weight: bold;
+	margin-bottom: 13px;
+	margin-left: 9px;
+	padding: 8px 20px;
+	height: 39px;
+}
+
+
+
+.jeditable-textfield form button[type=submit]
+{
+	display:inline-block;
+	 float:left;
+	 margin-left:300px;
+	 margin-top:-40px;
+}
+
+.jeditable-textfield form button[type=cancel]
+{
+	display:inline-block;
+	 float:left;
+	 margin-left:380px;
+	  margin-top:-52px
+}
+
+#twitter-auth-account-form  input.form-submit
+{
+   float: none;
+   margin-left: 0px;
+}
+
+.container-inline .fieldset-wrapper input.form-submit
+{
+	margin-left: 36px !important;
+}
+
+.page-taxonomy-term #content .video_rating
+{
+	width: 698px;
+}
+
+a#menu-icon {
+background: url("images/mobmenu.jpg") no-repeat scroll center center rgba(0, 0, 0, 0);
+display: none;
+float: right;
+height: 48px;
+margin-top: -31px;
+position: relative;
+width: 48px;
+z-index: 99;
+}
+
+
+.not-logged-in #page #primary-menu-bar
+{
+ margin-bottom: 0 !important;
+}
+
+.not-logged-in #page #branding a img
+{
+  margin-top: 12px;
+}
+.not-logged-in .flexslider ul.slides, .flex-nav-container ol.flex-control-nav, .flex-nav-container ul.flex-direction-nav, .flexslider ul.slides li img{
+ margin:0px;
+} 
+
+.not-front.not-logged-in #page #branding a img 
+{
+	 margin-top: 1px;
+}
+
+.front.logged-in #page #branding img
+{
+	position: absolute;
+	margin-top: 20px;
+}
+
+.front.logged-in .nav {
+	margin: 5px 0;
+}
+
+
+.commerce-backoffice-view .vbo-views-form select
+{
+	margin-left: -332px;
+	width: 331px;
+	max-width: 350px;
+}
+
+.field-type-video-form .video-preview 
+{
+	display:none;
+}
+
+.node-type-video .block-workbench #workbench-moderation-moderate-form .form-type-select
+{
+	 position: relative;
+}
+
+.node-type-video .block-workbench #workbench-moderation-moderate-form .styled-select
+{
+	margin-left: 14px;
+    margin-top: -23px;
+    position: absolute;
+}
+
+.node-type-video .block-workbench #workbench-moderation-moderate-form .styled-select select
+{
+	 border: 1px solid #FF0000;
+    cursor: pointer;
+    font-size: 14px;
+    height: 40px;
+    margin-left: -332px;
+    opacity: 0;
+    width: 330px;
+}
+
+.page-node-moderation .moderation-actions form.workbench-moderation-moderate-form div
+{
+	display:block;
+}
+
+.page-node-moderation .item-list li
+{float:left;}
+
+
+
+/***************Overide responsive file*************/
+.sidebar-first .content-inner
+{
+	margin-left: 0% !important;
+    margin-right: 0% !important;
+}
+
+.region-sidebar-first {
+    margin-left: 0% !important;
+    width:auto !important;
+}
+
+.node-type-video #columns .region-sidebar-second.sidebar
+{
+	float:left!important;
+}
+.front #content-column, .front .content-column,.front .sidebar
+{
+	clear:none!important;
+	float:none!important;
+}
+
+.page-node-add-video .block-workbench .workbench-info-block
+{
+	margin-top:10%;
+}
+.sidebar-second .content-inner {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}

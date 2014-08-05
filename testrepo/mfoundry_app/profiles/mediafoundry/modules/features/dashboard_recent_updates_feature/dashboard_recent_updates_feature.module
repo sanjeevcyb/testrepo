@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Dashboard Recent updates Feature feature.
+ */
+
+include_once 'dashboard_recent_updates_feature.features.inc';

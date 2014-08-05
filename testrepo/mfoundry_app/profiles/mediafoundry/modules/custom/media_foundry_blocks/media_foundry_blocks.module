@@ -1,0 +1,116 @@
+<?php
+/**
+* Implements hook_block_info().
+*/
+function media_foundry_blocks_block_info() {
+  $blocks = array();
+  $blocks['media_foundry_welcome_block'] = array(
+    'info' => t('Welcome user'),
+	'status' => TRUE,
+    'region' => 'header',
+	'weight' => 1,
+  );
+  $blocks['media_foundry_footer_links_block'] = array(
+    'info' => t('Footer links'),
+	'status' => TRUE,
+    'region' => 'footer',
+	'weight' => -1,
+  );
+  $blocks['media_foundry_wowza_info_block'] = array(
+	'info' => t('Wowza info'),
+	'status' => TRUE,
+	'region' => 'sidebar_second',
+	'weight' => -1,
+	'visibility' => 1,
+	'pages' => 'live-events/*',
+  );
+  $blocks['media_foundry_phome_block'] = array(
+	'info' => t('Publisher Home block'),
+	'status' => TRUE,
+	'region' => 'highlighted',
+    'weight' => -1,
+	'visibility' => 1,
+	'pages' => '<front>',
+  );
+  $blocks['media_foundry_affiliate_signin'] = array(
+	'info' => t('Affiliate Sign In block'),
+	'status' => TRUE,
+	'region' => 'header',
+  'weight' => 2,
+  );
+  return $blocks;
+}
+
+//Hook to change block definition before saving to the database.
+function media_foundry_blocks_block_info_alter(&$blocks, $theme, $code_blocks) {
+
+  if($theme == 'media_foundry_publisher') {
+    $blocks['media_foundry_blocks']['media_foundry_wowza_info_block']['status'] = 1;
+    $blocks['media_foundry_blocks']['media_foundry_phome_block']['status'] = 1;
+    $blocks['media_foundry_blocks']['media_foundry_affiliate_signin']['status'] = 0;
+  }
+  else if($theme == 'affiliate_theme_one') {   
+    $blocks['media_foundry_blocks']['media_foundry_wowza_info_block']['status'] = 0;
+    $blocks['media_foundry_blocks']['media_foundry_phome_block']['status'] = 0;
+  }
+}
+
+/**
+* Implements hook_block_view().
+*/
+function media_foundry_blocks_block_view($delta = '') {
+  $block = array();
+  global $user;
+  switch ($delta) {
+    case 'media_foundry_welcome_block':
+      $block['subject'] = '';
+	  if($user->uid) {
+		$block['content'] = theme('welcome_block_theme');
+	  }
+	break;
+	case 'media_foundry_wowza_info_block':
+      $block['subject'] = '';
+      $block['content'] = theme('wowza_block_theme');
+	break;
+	case 'media_foundry_footer_links_block':
+      $block['subject'] = '';
+      $block['content'] = theme('footer_links_theme');
+	break;
+	case 'media_foundry_phome_block':
+      $block['subject'] = '';
+      $block['content'] = theme('publisher_home_theme');
+	break;
+	case 'media_foundry_affiliate_signin':
+      $block['subject'] = '';
+	  if($user->uid  == 0) {
+		$block['content'] = theme('affiliate_signin_block_theme');
+	  }
+	break;
+  }
+  return $block;
+}
+
+function media_foundry_blocks_theme() {
+  return array(
+    'welcome_block_theme' => array(
+      'template' => 'welcome_block',
+	  'path'=> drupal_get_path('module', 'media_foundry_blocks') . '/templates',
+    ),
+	'wowza_block_theme' => array(
+      'template' => 'wowza_config',
+	  'path'=> drupal_get_path('module', 'media_foundry_blocks') . '/templates',
+    ),
+	'footer_links_theme' => array(
+      'template' => 'footer_links',
+	  'path'=> drupal_get_path('module', 'media_foundry_blocks') . '/templates',
+    ),
+	'publisher_home_theme' => array(
+      'template' => 'publisher_home_page_block',
+	  'path'=> drupal_get_path('module', 'media_foundry_blocks') . '/templates',
+    ),
+	'affiliate_signin_block_theme' => array(
+      'template' => 'affiliate_signin_block',
+	  'path'=> drupal_get_path('module', 'media_foundry_blocks') . '/templates',
+    ),
+  );
+ }

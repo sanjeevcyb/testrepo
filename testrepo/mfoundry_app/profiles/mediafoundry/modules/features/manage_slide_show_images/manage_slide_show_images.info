@@ -1,0 +1,13 @@
+name = Manage Slide Show Images
+description = Manage Slide Show Images
+core = 7.x
+package = Features
+version = 7.x-1.0
+project = manage_slide_show_images
+dependencies[] = ctools
+dependencies[] = slide_show
+dependencies[] = views
+dependencies[] = views_ui
+features[ctools][] = views:views_default:3.0
+features[features_api][] = api:2
+features[views_view][] = manage_slide_show_images

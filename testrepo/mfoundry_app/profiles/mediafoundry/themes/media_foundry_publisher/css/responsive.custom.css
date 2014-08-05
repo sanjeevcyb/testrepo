@@ -1,0 +1,469 @@
+/*
+ * responsive.custom.css is for custom media queries that are not set via the
+ * theme settings, such as cascading media queries.
+ *
+ * By default all the other responsive stylesheets used in Adaptivetheme use a
+ * "stacking method", however cascading media queries use a waterfall method so
+ * you can leverage the cascade and inheritance for all browsers that support
+ * media queries, regardless of screen size.
+ *
+ * @SEE http://zomigi.com/blog/essential-considerations-for-crafting-quality-media-queries/#mq-overlap-stack
+ *
+ * NOTE: this file loads by default, to disable got to your theme settings and
+ * look under the "CSS" settings tab.
+ */
+/*
+ * Really small screens and up
+ */
+/* @media only screen and (min-width: 220px) {} */
+/*
+ * Smartphone sizes and up
+ */
+/* @media only screen and (min-width: 320px) {} */
+/*
+ * Smartphone sizes and down
+ */
+@media only screen and (max-width: 480px) {
+  /* 
+   * Float Region blocks example:
+   * In smaller screen sizes we can remove the float and widths so all blocks
+   * stack instead of displaying horizonally. The selector used here is an
+   * "attribute selector" which will match on any float block class. Use your
+   * inspector or Firebug to get the classes from the page output if you need
+   * more granular control over block alignment and stacking.
+   * 
+   * "Float Region blocks" is an extension for floating blocks in regions, see
+   * your themes appearance settings, under the Extensions tab.
+   */
+  .region[class*="float-blocks"] .block {
+    float: none;
+    width: 100%;
+  }
+}
+/*
+ * Tablet sizes and up
+ */
+ @media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px){
+	
+	
+	 input[type="file"]::-webkit-file-upload-button
+	{
+		opacity: 0;
+		text-indent: -70px;
+
+	}
+	
+	
+	
+	
+	
+	#content {
+    padding: 20px;
+	}
+	
+	a.node-cancel
+	{
+		border-radius: 5px;
+	}
+	
+	#edit-actions a#edit-cancel
+	{
+		border-radius: 5px;
+	}
+
+	.front #topcontent .block-nodeblock .block-title{
+		margin: 0;
+		width: 150px;
+		 text-align: center;
+	}
+
+	#footer .block-content ul li,#footer .block-content ul li:first-child
+	{
+		width:102% !important;
+	}
+
+	#footer .block-content ul li:first-child ,#footer .block-content ul li:last-child{
+		text-align: center;
+	}
+		
+		
+	#footer #block-block-1
+	{
+		width: 99%;
+	}
+	#footer
+	{
+			height:auto !important;
+			height:initial;
+	}
+	.form-type-date-popup input.date-clear{
+		width: 142px !important;
+	}
+	body.page-node-add-video #video-node-form #edit-field-upload-video .video-widget .video-widget-data {
+		width: 62%;
+	}
+	#block-search-form #search-block-form .form-text {
+		width: 320px;
+	}
+	.form-item.form-type-textfield.form-item-search-block-form {
+	 width: 320px;
+	}
+	.page-media-dashboard .panel-2col .panel-col-last {
+	margin-top: 0;
+		max-width: none;
+	}
+	.block-title {
+		text-align: left;
+	}
+
+	.region-secondary-content .block-nodeblock .block-title
+	{
+		 text-align: center;
+	}
+	section.panel-pane .block-inner .pane-title {
+		width: 100% !important;
+	}
+	
+	#quicktabs-publisher_dashboard_events_block .quicktabs-tabs .last a {
+  	margin-left: -21px;
+    padding-left: 28px;
+    width: 46.4%;
+	}
+	
+	.page-publisher-account .view-publisher-account .views-field-edit-node-1 span a {
+	   margin-left: 33.5%;
+		margin-top: -5%;
+	}
+	
+	
+	.page-publisher-account #content-column #main-content #page-title 
+	{
+		width:50%;
+	}
+	
+	.page-publisher-account .about-user
+	{
+		margin-left: 193px;
+	    padding: 0;
+	    width: 93%;
+	}
+	
+	
+	body.node-type-video #video-node-form #edit-field-upload-video .video-widget .video-widget-data 
+	{
+		width:auto;
+	}
+	
+	.page-medialist .view-id-media_listing_page .item-list .pager li
+	{
+		width: 48px;
+	}
+	
+	 input[type="file"]::-webkit-file-upload-button
+ 	{
+    float: left;
+ 	cursor: pointer;
+	border:1px solid #BEBEBE;
+	border-right:1px solid #BEBEBE;
+	color:#565656;
+	font-size:90%;
+	line-height:2.5;
+	margin:0px 0px 0px 0;
+	padding:20px 4px;
+	text-decoration:none;
+	white-space:nowrap;
+   
+	}
+
+
+	.password-strength {
+	    float: right;
+	    margin-right: -53px;
+	    margin-top: 2.4em;
+	    width: 11em;
+	}
+	
+	.page-admin-people #page #block-system-main #edit-filters .exposed-filters #edit-submit {
+	 	margin-left: 49px;
+	    margin-top: 21px;
+	}
+	
+	
+	#domain-content-admin #edit-filters .fieldset-wrapper #edit-status input[type="submit"] {
+	    float: left;
+    	margin-left: 43px;
+   	    margin-top: 22px;
+	}
+		
+	.page-medialist .view-media-listing-page .views-widget-filter-field_category_tid .views-widget select {
+	    height: 40px;
+	}
+	
+	.commerce-backoffice-view .views-exposed-form .views-widget-filter-combine input {
+    height: 14px;
+	}
+	
+	select[multiple]
+	{
+	  width: 191px !important;
+	}
+	
+	
+	.page-admin-commerce-products .view-commerce-backoffice-all-product-variations #edit-combine-wrapper #edit-combine {
+    height: 24px;
+    width: 136px !important;
+	}
+	
+	.page-admin-commerce-products .view-commerce-backoffice-all-product-variations select
+	{
+	width: 170px !important;
+	}
+	
+	
+	#edit-filters .exposed-filters input[type=submit] {
+	    
+	    margin-top: 21px;
+	  
+	}
+	
+	#user-filter-form .fieldset-wrapper #edit-status #edit-actions
+	{
+		padding-top:0px;
+	}
+	
+	body.node-type-video #video-node-form #edit-field-upload-video .video-widget .video-widget-data {
+    float: left !important;
+	}
+	
+	body.node-type-video #page #edit-field-upload-video-und-0-ajax-wrapper .video-widget-data .file-size {
+        top: 10px;
+	}
+	
+	
+/*	body.node-type-video #video-node-form #edit-field-upload-video .video-widget label {
+        margin-left: -64px;
+	}*/
+	
+	.page-node-add-live-event .date-no-float
+	{
+		  width: 100%;
+	}
+	
+	.node-type-live-event .region-sidebar-second {
+  	  width: 734px;
+	}
+	
+	
+	.page-medialist .view-media-listing-page .view-content .views-table a {
+       margin-left: 9px;
+	}
+	
+	.node-type-video #columns > div.region.region-sidebar-second.sidebar {
+    margin-left: 0;
+	}
+	.node-type-video .region-sidebar-second {
+    width: 718px;
+	}
+	
+	
+	.node-type-video #workbench-moderation-moderate-form input[type="submit"] {
+	    margin-left: 0;
+	    top: 10px;
+	}
+	
+	.about-user {
+      margin-left: 55px;
+   	}
+   	
+   	
+	.account-details {
+		padding-left: 8px;
+	}
+	.pane-quicktabs-publisher-dashboard-events-block #quicktabs-container-publisher_dashboard_events_block #block-views-live-events-block table tr:nth-child(2n+2) {
+    height: 27px;
+	}
+	
+	.page-media-dashboard #quicktabs-publisher_dashboard_events_block .view-live-events .item-list {
+    padding-left: 189px;
+ 	}
+	
+	.nav ul.menu {
+	 background: none repeat scroll 0 0 #4D4D4D;
+    float: right;
+    margin-right: -9px;
+    margin-top: 11px;
+    position: relative;
+    width: 185px;
+    z-index: 9999;
+ 	}
+	
+	#primary-menu-bar nav
+	{
+		display:none;
+	}
+	.nav ul.menu li {
+	border-bottom: 1px solid #000000;
+	line-height: 40px;
+	margin: 0;
+	width: 100%;
+	}
+	
+	#primary-menu-bar ul.menu li a:hover, #primary-menu-bar ul.menu li a.active {
+	background: none repeat scroll 0 0 #2D2D2D;
+	color: #FFFFFF;
+	border-bottom: 1px solid #000000;
+	}
+	
+	a#menu-icon {
+		display: block;
+		height: 40px;
+		margin-top: -40px;
+	}
+	
+	#primary-menu-bar ul.menu li a {
+    color: #FFFFFF;
+	}
+	#primary-menu-bar {
+	 height: 39px;
+	}
+}
+
+
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : landscape){
+
+	#quicktabs-publisher_dashboard_events_block
+	{
+		width: 87%;
+	}
+
+	body.page-node-add-video #video-node-form #edit-field-upload-video .video-widget .video-widget-data {
+	    width: 46%;
+	}
+	.page-admin-people #page #block-system-main #edit-filters .exposed-filters #edit-submit {
+	 margin-left: -14px;
+	}
+	
+	
+	#domain-content-admin #edit-filters .fieldset-wrapper #edit-status input[type="submit"] {
+	    margin-left: 8px;
+	   
+	}
+
+	.commerce-backoffice-view .views-exposed-form .views-widget-filter-combine input {
+    height: 22px;
+	}
+	
+	
+	.page-admin-commerce-products .view-commerce-backoffice-all-product-variations #edit-combine-wrapper #edit-combine {
+	       width: 252px !important;
+	}
+	
+	.node-type-live-event .region-sidebar-second {
+    width: 734px;
+	}
+	
+	.page-publisher-account .view-publisher-account .views-field-edit-node-1 span a {
+    margin-left: 25.5%;
+	}
+	
+	#quicktabs-publisher_dashboard_events_block .quicktabs-tabs .last a {
+      padding-left: 29px;
+	}
+	
+	.view-media-listing-page .views-exposed-form input[type="text"] {
+    width: 194px;
+	}
+	
+	.about-user {
+      margin-left: 13px;
+   }
+   
+	.page-media-dashboard #quicktabs-publisher_dashboard_events_block .view-live-events .item-list {
+    padding-left: 261px;
+	}
+	
+}
+
+
+@media only screen  and (max-width : 767px) {
+
+	#footer .block-content ul li:last-child
+	{
+	text-align:center;
+	}
+
+	#footer .block-content ul li:first-child{
+	text-align:center;
+	width:100%;
+	}
+	
+	#footer{
+		    min-height: 116px;
+		    float: left;
+			width: 100%;
+	}
+	 #footer .block-content ul li{
+	 	float:left;
+	 	width:100%;
+	 }
+	 
+	 .page-media-dashboard .panel-col-first .inside .block-inner h2
+	 {
+		width: 32%;
+	 }
+	 
+	.nav ul.menu {
+	 background: none repeat scroll 0 0 #4D4D4D;
+    float: right;
+    margin-right: -9px;
+    margin-top: 11px;
+    position: relative;
+    width: 185px;
+    z-index: 9999;
+   
+	}
+	
+	#primary-menu-bar nav
+	{
+		display:none;
+	}
+	.nav ul.menu li {
+	border-bottom: 1px solid #000000;
+	line-height: 40px;
+	margin: 0;
+	width: 100%;
+	}
+	
+	#primary-menu-bar ul.menu li a:hover, #primary-menu-bar ul.menu li a.active {
+	background: none repeat scroll 0 0 #2D2D2D;
+	color: #FFFFFF;
+	border-bottom: 1px solid #000000;
+	}
+	
+	a#menu-icon {
+	display: block;
+    height: 40px;
+    margin-top: -40px;
+	}
+	
+	#primary-menu-bar ul.menu li a {
+    color: #FFFFFF;
+	}
+	
+	#primary-menu-bar {
+	 height: 39px;
+	}
+}
+
+
+
+
+/*
+ * Desktops/laptops and up
+ */
+/* @media only screen and (min-width: 1025px) {} */

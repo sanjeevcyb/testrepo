@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the One Time Subscription feature.
+ */
+
+include_once 'one_time_subscription.features.inc';

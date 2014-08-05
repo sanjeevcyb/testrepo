@@ -1,0 +1,16 @@
+name = related video
+description = related video
+core = 7.x
+package = Features
+version = 7.x-1.0
+project = related_video
+dependencies[] = ctools
+dependencies[] = domain
+dependencies[] = fe_block
+dependencies[] = video
+dependencies[] = views
+dependencies[] = views_ui
+features[ctools][] = views:views_default:3.0
+features[fe_block_settings][] = views-related_video-block
+features[features_api][] = api:2
+features[views_view][] = related_video

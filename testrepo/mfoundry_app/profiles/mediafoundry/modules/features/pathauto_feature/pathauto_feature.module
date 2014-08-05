@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Pathauto Feature feature.
+ */
+
+include_once 'pathauto_feature.features.inc';

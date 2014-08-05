@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Homepageevents feature.
+ */
+
+include_once 'homepageevents.features.inc';

@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Userinformation feature.
+ */
+
+include_once 'userinformation.features.inc';

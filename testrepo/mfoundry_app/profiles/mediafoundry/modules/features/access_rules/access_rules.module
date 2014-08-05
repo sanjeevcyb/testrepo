@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Access Rules feature.
+ */
+
+include_once 'access_rules.features.inc';

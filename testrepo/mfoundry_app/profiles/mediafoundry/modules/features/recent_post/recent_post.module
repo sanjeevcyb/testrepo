@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Recent Post feature.
+ */
+
+include_once 'recent_post.features.inc';

@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the media video content type feature.
+ */
+
+include_once 'media_video_content_type.features.inc';

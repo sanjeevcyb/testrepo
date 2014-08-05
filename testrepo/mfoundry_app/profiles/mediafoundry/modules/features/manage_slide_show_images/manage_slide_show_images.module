@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Manage Slide Show Images feature.
+ */
+
+include_once 'manage_slide_show_images.features.inc';

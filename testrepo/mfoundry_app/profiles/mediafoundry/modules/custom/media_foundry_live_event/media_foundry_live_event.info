@@ -1,0 +1,8 @@
+name = Media foundry live event
+description = Custom module for media foundry live events.
+package = Custom
+core = 7.x
+
+files[] = media_foundry_live_event.module
+
+

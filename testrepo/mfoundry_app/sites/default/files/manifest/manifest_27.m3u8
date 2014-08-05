@@ -1,0 +1,3 @@
+#EXTM3U
+#EXT-X-VERSION:3http://192.168.254.93:1935/vod/_definst_/mp4:dev/videos/converted/25/Shark_clip4_240_1_512kb_mf_mp4_256x144p_1398414323_mf_mp4_416x234p_1404475447.mp4/chunklist.m3u8
+http://192.168.254.93:1935/vod/_definst_/mp4:dev/videos/converted/25/Shark_clip4_240_1_512kb_mf_mp4_256x144p_1398414323_mf_mp4_960x540p_1404475450.mp4/chunklist.m3u8

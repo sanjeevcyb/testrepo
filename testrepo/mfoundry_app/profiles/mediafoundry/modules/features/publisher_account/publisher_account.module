@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Publisher Account feature.
+ */
+
+include_once 'publisher_account.features.inc';

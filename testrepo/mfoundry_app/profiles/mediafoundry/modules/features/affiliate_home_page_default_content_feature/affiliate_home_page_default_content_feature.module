@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Affiliate Home Page Default Content Feature feature.
+ */
+
+include_once 'affiliate_home_page_default_content_feature.features.inc';

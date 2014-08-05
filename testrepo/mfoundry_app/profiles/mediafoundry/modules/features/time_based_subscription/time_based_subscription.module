@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Time Based Subscription feature.
+ */
+
+include_once 'time_based_subscription.features.inc';

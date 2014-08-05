@@ -1,0 +1,635 @@
+<?php
+/**
+ * @file
+ * Custom module for customization of functionalities.
+ *
+ * Facebook button link for Sign in on affiliate sites.
+ */
+function facebook_signin_button() {
+  global $base_url;
+  return "<a href='" . $base_url . "/user/simple-fb-connect'>Facebook</a>";
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function media_foundry_user_helper_form_alter(&$form, $form_state, $form_id) {
+  switch ($form_id) {
+    case 'user_pass':
+      $form['actions']['submit']['#value'] = t('Submit');
+      $form['custom_text'] = array('#markup' => '<p>If you have forgotten your password, enter your e-mail id to recover.<br> Check your e-mail after some time. </p>', '#weight' => 0);
+      break;
+
+    case 'user_login':
+      $items = array();
+      $items[] = facebook_signin_button();
+      $form['fb_signin'] = array('#markup' => theme('item_list', array('items' => $items)), );
+      break;
+
+    case 'user_login_block':
+      /*For adding Forget Password and Submit/Sign in button theming*/
+      $domainId = domain_get_domain();
+      if ($domainId['is_default']) {
+        $items = array();
+        $items[] = l( t('Forgot password'), '', array('attributes' => array('class' => array('recover-password'))));
+        $form['links']['#markup'] = theme('item_list', array('items' => $items));
+        $form['actions']['submit']['#value'] = t('Sign In');
+      }
+      else {
+        $item = array();
+        $item[] = l( t('Sign Up'),'user/register', array('attributes' => array('class' => array('sign-up'))));
+        $item[] = l( t('Forgot password'), '', array('attributes' => array('class' => array('recover-password'))));
+        $form['links']['#markup'] = theme('item_list', array('items' => $item));
+        $form['actions']['submit']['#weight'] = 5;
+        $form['actions']['submit']['#value'] = t('Sign In');
+
+        /*For adding Facebook and Twitter buttons*/
+        unset($form['twitter_signin']);
+        $items[] = facebook_signin_button();
+        $items[] = twitter_signin_button();
+
+        $form['fb_signin'] = array(
+            '#markup' => theme('item_list', array('items' => $items)),
+        );
+        $form['fb_signin']['#prefix'] = "<div class='siginft'>";
+        $form['fb_signin']['#suffix'] = "</div>";
+        $form['fb_signin']['#weight'] = 10;
+        //$form['#after_build'][] = 'user_login_block_custom_after_build';
+      }
+      // If we are already validating form.
+      if (is_array($form['#validate'])) {
+        // Add validate function to beginning of hook array.
+        array_unshift($form['#validate'], '_media_foundry_user_helper_validate');
+      }
+      else {
+        // Add form validation.
+        $form['#validate'][] = '_media_foundry_user_helper_validate';
+      }
+      /*Remove FB Sign-up and Twitter button on Publisher account*/
+      $domainInfo = domain_get_domain();
+      if ($domainInfo['domain_id'] == 1) {
+        unset($form['fb_signin']);
+      }
+      break;
+
+      // Provide option to enable/disable restriction on domain settings form.
+    case 'domain_configure_form':
+      // Add form element fieldset.
+      $form['domain_account_login_fieldset'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Domain Bonus: Login restrict'),
+      '#collapsible' => TRUE,
+      '#collapsed' => FALSE,
+      '#weight' => 1
+      );
+
+      // Add form element.
+      $form['domain_account_login_fieldset']['domain_bonus_login_restrict_enabled'] = array(
+          '#type' => 'checkbox',
+          '#title' => t('Enable restriction'),
+          '#default_value' => variable_get('domain_bonus_login_restrict_enabled', 1),
+          '#description' => t('If checked allow user account login by registered domain' .
+              ' affiliation only.'),
+          '#weight' => 1
+      );
+      // Put buttons under fieldset.
+      $form['buttons']['#weight'] = 2;
+      break;
+
+    case 'commerce_checkout_form_checkout':
+      // If we are already validating form.
+      if (is_array($form['#validate'])){
+        // Add validate function to beginning of hook array.
+        array_unshift($form['buttons']['continue']['#validate'], '_commerce_checkout_form_checkout_validate');
+      }
+      else {
+        // Add form validation.
+        $form['buttons']['continue']['#validate'][] = '_commerce_checkout_form_checkout_validate';
+      }
+      break;
+
+    case 'twitter_oauth_callback_form':
+      if ($form_id == 'twitter_oauth_callback_form' && isset($_SESSION['twitter_oauth']['signin'])) {
+        $form['#submit'] = array_merge(array('media_foundry_user_helper_oauth_callback_submit'), $form['#submit']);
+      }
+      $domainInfo = domain_get_domain();
+      if (($domainInfo['domain_id'] != 1)&&($form_id == 'user_login' || $form_id == 'user_login_block')) {
+        $items = array();
+        $items[] = twitter_signin_button();
+
+        $form['twitter_signin'] = array(
+            '#markup' => theme('item_list', array('items' => $items)),
+        );
+      }
+      elseif ($form_id == 'user_register_form' && isset($_SESSION['twitter']['values'])) {
+        $form['account']['name']['#default_value'] = $_SESSION['twitter']['values']['screen_name'];
+        $form['auth_twitter'] = array(
+            '#type' => 'hidden',
+            '#value' => $_SESSION['twitter']['values']['user_id'],
+        );
+      }
+      break;
+    /*case 'commerce_product_ui_product_form':
+      $form['sku']['#field_prefix'] = 'test-sku';
+      $form['actions']['submit']['#submit'][] = 'media_foundry_user_helper_sku_insert';
+      break;*/
+    case 'commerce_product_ui_product_type_form':
+    /*  $form['product_type']['autosku_status']['#default_value'] = '1';
+      $form['product_type']['autosku']['pattern']['#default_value'] = '[commerce-product:product-sku-gen]-[random:number]-[current-domain:id]';
+      $form['product_type']['autosku']['advanced']['hide_sku']['#default_value']  = '1';*/
+      db_update('commerce_autosku_patterns')
+                ->fields(array('pattern' => '[commerce-product:product-sku-code]-[random:number]-[current-domain:id]'))
+                ->condition('product_type', 'product', '=')->execute();
+      break;
+    default:
+      drupal_add_js(drupal_get_path('module', 'media_foundry_user_helper') . '/js/mf_custom.js');
+      break;
+  }
+}
+
+
+/*function media_foundry_user_helper_sku_insert($form, &$form_state) {
+  $form_state['values']['sku'] = 'test-sku'.$form_state['values']['sku'];
+  $form_state['rebuild'] =TRUE;
+  //echo "<pre>"; print_r($form); exit;
+}*/
+
+/**
+ * Twitter Sign-in button.
+ */
+function user_login_block_custom_after_build($form, &$form_state) {
+  unset($form['twitter_signin']);
+}
+
+/**
+ * Validate customer billing information.
+ */
+function _commerce_checkout_form_checkout_validate($form, &$form_state) {
+  $flagValidate = 0;
+  if (preg_match('/[^A-Za-z ]+/', $form_state['values']['customer_profile_billing']['commerce_customer_address']['und'][0]['locality'])){
+    $flagValidate = 1;
+    form_set_error('edit-customer-profile-billing-commerce-customer-address-und-0-locality', t('Please Enter Valid City'));
+  }
+  if (preg_match('/[^A-Za-z ]+/', $form_state['values']['customer_profile_billing']['commerce_customer_address']['und'][0]['administrative_area'])){
+    $flagValidate = 1;
+    form_set_error('edit-customer-profile-billing-commerce-customer-address-und-0-administrative-area', t('Please Enter Valid State'));
+  }
+  if (preg_match('/[^0-9]+/', $form_state['values']['customer_profile_billing']['commerce_customer_address']['und'][0]['postal_code'])){
+    $flagValidate = 1;
+    form_set_error('edit-customer-profile-billing-commerce-customer-address-und-0-postal-code', t('Please Enter Valid Postal Code'));
+  }
+  if($flagValidate == 1){
+    $form_state['rebuild'] = TRUE;
+  }
+}
+
+/**
+ * Validate handler on the login form.
+ */
+function _media_foundry_user_helper_validate($form, &$form_state) {
+ $submitted = $form_state['values'];
+ if (variable_get('domain_bonus_login_restrict_enabled', 0)) {
+  if (isset($submitted['name']) && ($submitted['name'] != '')) {
+   // If load user object from submitted username is successful.
+   if ($account = user_load_by_name($submitted['name'])) {
+
+    $domain = module_invoke('domain', 'get_domain'); // return the active domain
+
+    // If the active domain id is not assigned to user validated, and user is not
+    // permitted to access any domain.
+    if (!in_array($domain['domain_id'], $account->domain_user) &&
+      !user_access('login to any domain', $account)) {
+
+     // Display error on form.
+     /*form_set_error('name', t('Sorry, unrecognized USERNAME or password.'
+      . ' <a href="@password">Have you forgotten your password?</a>',
+       array('@password' => url('user/password'))));*/
+
+     form_set_error('name', t('This USERNAME is already registered with our different domain. Please contact to admin if you want to access this daomain with same USERNAME.',
+     array('@password' => url('user/password'))));
+
+     // Log attempt to log in by user, in the database.
+     watchdog('user', 'Login attempt restricted for %user by <em>Domain Bonus: Login'
+       . ' restrict</em>. Domain <em>' . $domain['subdomain'] . '</em> was not'
+         . ' assigned to them.', array('%user' => $form_state['values']['name']));
+    }
+   }
+  }
+ }
+}
+
+/*
+function media_foundry_user_helper_node_access($node, $op, $account) {
+ //Ignore Access denied for static pages
+ if($node->type == 'page')
+ {
+  return NODE_ACCESS_IGNORE;
+ }
+ $domain = domain_get_domain();
+ if($domain['domain_id'] != 1 && $op == 'view'){
+  if(in_array($domain['domain_id'], $node->domains)){
+
+  }else{
+   return NODE_ACCESS_DENY;
+  }
+ }
+}
+*/
+
+/**
+ * Implements hook_node_view()
+ *
+ * Display debugging information for a node.
+ */
+function media_foundry_user_helper_node_view($node, $view_mode) {
+  $domain = domain_get_domain();
+  if ($domain['domain_id'] != 1 && $view_mode == 'teaser') {
+    if ($node->domain_site == True || in_array($domain['domain_id'], $node->domains)) {
+
+    } else {
+      $node->title ="";
+      $node->content =array();
+    }
+  }//if($domain['domain_id'] != 1 && $view_mode == 'teaser')
+
+}//End of  function media_foundry_user_helper_node_view($node, $view_mode)
+
+function media_foundry_user_helper_perm() {
+  return array('view hidden tabs');
+}
+
+function media_foundry_user_helper_menu_alter(&$items) {
+  /*To restrict Publisher admin from editing Permissions and Roles*/
+  $items['admin/people/permissions']['access callback'] = 'user_access';
+  $items['admin/people/permissions']['access arguments'] = array('view hidden tabs');
+  $items['admin/people/permissions/roles']['access callback'] = 'user_access';
+  $items['admin/people/permissions/roles']['access arguments'] = array('view hidden tabs');
+  /*To restrict Publisher admin from editing Admin Account*/
+  $items['user/%user']['access callback']='media_foundry_user_helper_user_access';
+  $items['user/%user/edit']['access callback']='media_foundry_user_helper_user_access';
+}
+
+/*To restrict Publisher admin from editing Admin Account*/
+function media_foundry_user_helper_user_access($account) {
+  global $user;
+  if ($account->uid) { // so we don't try to look at an anonymous user
+    $account = user_load($account->uid); // load the full user object (ADDITION:  was user_load($uid) in original post, oops)
+    if ($user->uid == 1) { // admin super user
+      return TRUE;
+    }
+    if ($user->uid == $account->uid) {
+      return TRUE; // same user so allow (we will assume blocked users aren't logged in)
+    }
+    if (in_array('publisher admin', $user->roles) && $account->uid != 1) {
+      return true;
+    }
+  }
+  return FALSE;
+
+}
+/*Redirect Forget Password to Frontpage*/
+function _password_recover_submit($form, &$form_state){
+  $form_state['redirect'] = '/';
+}
+
+/*Save the default thumbnail if Save is pressed before Upload*/
+function media_foundry_user_helper_node_presave($node)
+{
+  if($node->type=='video')
+  {
+    $fid = $node->field_upload_video['und'][0]['fid'] ;
+    $queryProds = "SELECT `fid` FROM `file_managed` WHERE `filename` LIKE 'thumbnail-".$fid."_%' limit 0,1";
+    $resProds = db_query($queryProds);
+    $rowsProds = $resProds->fetchAll();
+    if($node->field_upload_video['und'][0]['thumbnail'] == 0)
+    {
+      $node->field_upload_video['und'][0]['thumbnail'] = $rowsProds[0]->fid;
+    }
+  }
+ /* if($node->type=='event_display')
+  { 
+    echo '<pre>'; print_r($node); exit;
+  }*/
+}
+
+/**
+ * Form submit for the OAuth callback. Here we add in sign-in specific handling.
+ */
+function media_foundry_user_helper_oauth_callback_submit(&$form, &$form_state) {
+  global $user;
+  $success = FALSE;
+
+  $key = variable_get('twitter_consumer_key', '');
+  $secret = variable_get('twitter_consumer_secret', '');
+  $response = $form_state['twitter_oauth']['response'];
+
+  $account = user_external_load($response['user_id']);
+  if (isset($account->uid)) {
+    user_external_login($account, $account->uid);
+    // watchdog("if user_profile", '<pre>' . print_r( $response, true) . '</pre>');
+    $success = TRUE;
+  }
+  elseif ($uid = db_query("SELECT uid FROM {twitter_account} WHERE twitter_uid = :twitter_uid",
+      array(':twitter_uid' => $response['user_id']))->fetchField()) {
+    // We have an existing Twitter account - set it up for login.
+    $account = user_load($uid);
+    //watchdog("else user_profile", '<pre>' . print_r($account->picture, true) . '</pre>');
+    $edit["authname_twitter"] = $response['user_id'];
+    //$account->picture = $account->picture->fid;
+    //watchdog("else user_profile", '<pre>' . print_r($account->picture, true) . '</pre>');
+    user_save($account, $edit);
+    //Added the below line to update twitter account profile picture
+    $account = user_load($uid);
+
+    $user = $account;
+    $form_state['twitter_oauth']['account'] = $account;
+    $success = TRUE;
+  }
+  else {
+    // No existing user account, let's see if we can register.
+    if (variable_get('twitter_signin_register', 0)) {
+      // Check for a nickname collision.
+      $account = array_shift(user_load_multiple(array(), array('name' => $response['screen_name'])));
+      if (empty($account->uid)) {
+        $password = user_password();
+        $account->name = $response['screen_name'];
+        $account->pass = $password;
+        $account->init = $response['screen_name'];
+        $account->status = 1;
+        $account->authname_twitter = $response['user_id'];
+        $account->access = REQUEST_TIME;
+        $account->is_new = TRUE;
+        $account = user_save($account);
+
+        //watchdog("user_profile", '<pre>' . print_r( $response, true) . '</pre>');
+        /* To assign domains that user register on automatically */
+        $domainId = domain_get_domain();
+        if (!$domainId['is_default']) {
+          $record = array('uid' => $account->uid, 'domain_id' => $domainId['domain_id']);
+          $query = db_insert('domain_editor')->fields(array('uid', 'domain_id'));
+          $query->values($record);
+          $query->execute();
+        }
+        $user = $account;
+        $form_state['twitter_oauth']['account'] = $account;
+        drupal_set_message(t('You have been automatically registered with twitter. You can login using twitter next time.'
+            , array(
+            '!link' => l('set your account settings', 'user/' . $account->uid . '/edit'),
+            )
+        ));
+
+        $success = TRUE;
+      }
+      else {
+        drupal_set_message(t('The nickname %name is already in use on this site, please register below with a new nick name, or @login to continue.',
+        array(
+        '%name' => $response['screen_name'],
+        '@login' => url('user/login')
+        )
+        ), 'warning');
+      }
+    }
+    else {
+      drupal_set_message(t('Please log in or register to relate your Twitter account with a user.'));
+    }
+  }
+
+  if (!$success) {
+    $_SESSION['twitter']['values'] = $response;
+    drupal_goto('user/login');
+  }
+  else {
+    user_login_finalize();
+  }
+}
+
+/**
+ * Implements hook_menu().
+ */
+function media_foundry_user_helper_menu() {
+  $items['user/simple-fb-connect'] = array(
+      'title' => (variable_get('simple_fb_connect_login_only', 0) == 0 ? 'Register/' : '') . 'Login with FB',
+      'page callback' => 'media_foundry_user_helper_login',
+      'access callback' => 'user_is_anonymous',
+      //'type' => MENU_LOCAL_TASK, //this is commented to remove a user tab on login page
+  );
+
+  $items['admin/config/people/simple-fb-connect'] = array(
+      'title' => 'Simple FB Connect Settings',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('simple_fb_connect_api_keys_settings'),
+      'access arguments' => array('administer simple fb'),
+      'file' => 'simple_fb_connect.admin.inc',
+  );
+  return $items;
+}
+
+/**
+ * Page callback for the FB Connect URL.
+ * Overwritten function simple_fb_connect_login() of Simpl FB Connect
+ */
+function media_foundry_user_helper_login() {
+  $facebook = facebook_client();
+  $acc = $facebook->getAccessToken();
+  $fb_user = $facebook->getUser();
+  if ($fb_user) {
+    $fb_user_profile = $facebook->api('/me');
+    $query = db_select('users', 'u');
+    $query->condition('u.mail', check_plain($fb_user_profile['email']));
+    $query->fields('u', array('uid'));
+    $query->range(0, 1);
+    $drupal_user_id = 0;
+    $result = $query->execute();
+    foreach ($result as $record) {
+      $drupal_user_id = $record->uid;
+    }
+
+    if ($drupal_user_id) {
+      $user_obj = user_load($drupal_user_id);
+      if ($user_obj->status) {
+        $form_state = array();
+        $form_state['uid'] = $user_obj->uid;
+        user_login_submit(array(), $form_state);
+        drupal_set_message(t('You have been logged in with the username !username', array('!username' => $user_obj->name)));
+      }
+      else {
+        drupal_set_message(t('You could not be logged in as your account is blocked. Contact site administrator.'), 'error');
+      }
+      drupal_goto('user');
+    }
+    else {
+      if (!variable_get('simple_fb_connect_login_only', 0)) {
+        //create the drupal user
+        //This will generate a random password, you could set your own here
+        // echo "username...".$fb_user_profile['username'];
+        $drupal_username_generated = simple_fb_connect_unique_user_name(check_plain($fb_user_profile['username']));
+        $password = user_password(8);
+        //set up the user fields
+        $fields = array(
+            'name' => $drupal_username_generated,
+            'mail' => check_plain($fb_user_profile['email']),
+            'pass' => $password,
+            'status' => 1,
+            'init' => 'email address',
+            'roles' => array(
+                DRUPAL_AUTHENTICATED_RID => 'authenticated user',
+            ),
+        );
+        if (variable_get('user_pictures', 0)) {
+          $dimensions_in_text = variable_get('user_picture_dimensions', SIMPLE_FB_CONNECT_DEFAULT_DIMENSIONS_STRING);
+          $dimensions = explode('x', $dimensions_in_text);
+          if (count($dimensions) == 2) {
+            $width = $dimensions[0];
+            $height = $dimensions[1];
+          }
+          else {
+            $width = SIMPLE_FB_CONNECT_DEFAULT_WIDTH;
+            $height = SIMPLE_FB_CONNECT_DEFAULT_HEIGHT;
+          }
+          $pic_url = "https://graph.facebook.com/" . check_plain($fb_user_profile['username']) . "/picture?width=$width&height=$height";
+          $response = drupal_http_request($pic_url);
+          $file = 0;
+          if ($response->code == 200) {
+            $file = file_save_data($response->data);
+          }
+          if (is_object($file)) {
+            $fields['picture'] = $file->fid;
+          }
+        }
+
+        //the first parameter is left blank so a new user is created
+        $account = user_save('', $fields);
+
+        /* To assign domains that user register on automatically */
+        $domainId = domain_get_domain();
+        if (!$domainId['is_default']) {
+          $record = array('uid' => $account->uid, 'domain_id' => $domainId['domain_id']);
+          $query = db_insert('domain_editor')->fields(array('uid', 'domain_id'));
+          $query->values($record);
+          $query->execute();
+        }
+        // If you want to send the welcome email, use the following code
+        // Manually set the password so it appears in the e-mail.
+        $account->password = $fields['pass'];
+        // Send the e-mail through the user module.
+        drupal_mail('user', 'register_no_approval_required', $account->mail, NULL, array('account' => $account), variable_get('site_mail', 'admin@drupalsite.com'));
+        drupal_set_message(t('You have been registered with the username !username', array('!username' => $account->name)));
+        drupal_goto("user/simple-fb-connect");
+      }
+      else {
+        drupal_set_message(t('There was no account with the email addresse !email found. Please register before trying to login.', array('!email' => check_plain($fb_user_profile['email']))), 'error');
+        drupal_goto("user");
+      }
+    }
+  }
+  else {
+    if (!isset($_REQUEST['error'])) {
+      if (variable_get('simple_fb_connect_appid', 0)) {
+        $login_url_params = array(
+            'scope' => 'email',
+            'fbconnect' => 1,
+            'redirect_uri' => 'http://' . $_SERVER['HTTP_HOST'] . request_uri(),
+        );
+        $login_url = $facebook->getLoginUrl($login_url_params);
+        drupal_goto($login_url);
+      }
+      else {
+        drupal_set_message(t('Facebook App ID Missing. Can not perform Login now. Contact Site administrator.'), 'error');
+        drupal_goto("user");
+      }
+    }
+    else {
+      if ($_REQUEST['error'] == SIMPLE_FB_CONNECT_PERMISSION_DENIED_PARAMETER) {
+        drupal_set_message(t('Could not login with facebook. You did not grant permission for this app on facebook to access your email address.'), 'error');
+      }
+      else {
+        drupal_set_message(t('There was a problem in logging in with facebook. Contact site administrator.'), 'error');
+      }
+      drupal_goto('user');
+    }
+  }
+}
+
+/**
+ * Implements hook_twitter_accounts().
+ *
+ * @return
+ *   array with Twitter accounts
+ */
+function media_foundry_user_helper_twitter_accounts($account) {
+  return array();
+}
+
+/*Function to change the weightage of modules*/
+function media_foundry_user_helper_module_implements_alter(&$implementations, $hook) {
+  /*Override twitter module form_alter*/
+
+  if ($hook == 'form_alter') {
+    $module = 'twitter_signin';
+    //$group = $implementations['twitter_signin'];
+    unset($implementations[$module]);
+  }
+  if ($hook == 'twitter_accounts') {
+    $module = 'twitter';
+    unset($implementations[$module]);
+  }
+  /*Override simple_fb_connect module form_alter*/
+  if ($hook == 'menu') {
+    $module = 'simple_fb_connect';
+    $group = $implementations[$module];
+    unset($implementations['simple_fb_connect']);
+    $implementations['simple_fb_connect'] = $group;
+  }
+}
+
+function media_foundry_user_helper_token_info() {
+  $product = array();
+  $product['product-sku-code'] = array(
+    'name' => t('Product SKU Code'),
+    'description' => t('The code entered by publisher to be prepended with every SKU.'),
+  );
+
+  return array(
+    'tokens' => array('commerce-product' => $product),
+  );
+}
+
+function media_foundry_user_helper_tokens($type, $tokens, array $data = array(), array $options = array()) {
+  $url_options = array('absolute' => TRUE);
+
+  if (isset($options['language'])) {
+    $url_options['language'] = $options['language'];
+    $language_code = $options['language']->language;
+  }
+  else {
+    $language_code = NULL;
+  }
+
+  $sanitize = !empty($options['sanitize']);
+
+  $replacements = array();
+
+  if ($type == 'commerce-product' && !empty($data['commerce-product'])) {
+    $product = $data['commerce-product'];
+
+    foreach ($tokens as $name => $original) {
+      switch ($name) {
+        // Simple key values on the product.
+        case 'product-sku-code':
+          $replacements[$original] = variable_get('sku_code');
+          break;
+      }
+    }
+    if ($creator_tokens = token_find_with_prefix($tokens, 'creator')) {
+      $creator = user_load($product->uid);
+      $replacements += token_generate('user', $creator_tokens, array('user' => $creator), $options);
+    }
+
+    foreach (array('created', 'changed') as $date) {
+      if ($created_tokens = token_find_with_prefix($tokens, $date)) {
+        $replacements += token_generate('date', $created_tokens, array('date' => $product->{$date}), $options);
+      }
+    }
+  }
+  return $replacements; 
+}

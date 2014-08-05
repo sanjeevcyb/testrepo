@@ -1,0 +1,6 @@
+input[type="text"] {
+    border: 1px solid #BEBEBE;
+    color: #555555;
+    height: 40px;
+    text-indent: 10px;
+}

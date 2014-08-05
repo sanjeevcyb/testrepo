@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Manage blog feature.
+ */
+
+include_once 'manage_blog.features.inc';
